@@ -1,8 +1,8 @@
 <?php
 
-function locale_is_default() {
+/*function locale_is_default() {
     return \App::isLocale(\Config::get('app.fallback_locale'));
-}
+}*/
 
 function add_flash_message(array $notification){
     if(empty(session('notification_collection'))) {

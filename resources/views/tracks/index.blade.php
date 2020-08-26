@@ -5,11 +5,6 @@
 @section('content')
 
     <H1>@lang('Spår')</H1>
-    @if($showall)
-        <small><a class="black" href="/settings">@lang('Visar nu tillfälligt samtliga spår. För att lägga till spår permanent i listan, gå till dina inställningar.')</a></small>
-    @else
-        <small><a class="black" href="?showall=1">@lang('Visar endast dina valda spår. Klicka här för att visa samtliga spår.')</a></small>
-    @endif
 
     @if(count($tracks) > 0)
         <ul class="list-group mb-3 tracks" id="tracks">
@@ -28,28 +23,26 @@
         </ul>
     @else
         <br>
-        @lang('Du har inga spår valda. Gå till dina inställningar för att välja vilka spår som ska visas här!')
+        @lang('Det finns inga spår!')
     @endif
 
     @can('manage lessons')
-        @if($showall)
-            <script type="text/javascript" language="javascript" src="{{asset('vendor/jquery-ui-1.12.1.custom/jquery-ui.min.js')}}"></script>
-            <script type="text/javascript">
-                $(function() {
-                    $("#tracks").sortable({
-                    update: function (e, u) {
-                        var token = "{{ csrf_token() }}";
-                        var data = $(this).sortable('serialize');
-                        $.ajax({
-                            url: '/tracks/reorder',
-                            data : {_token:token,data:data},
-                            type: 'POST'
-                        });
-                    }
+        <script type="text/javascript" language="javascript" src="{{asset('vendor/jquery-ui-1.12.1.custom/jquery-ui.min.js')}}"></script>
+        <script type="text/javascript">
+            $(function() {
+                $("#tracks").sortable({
+                update: function (e, u) {
+                    var token = "{{ csrf_token() }}";
+                    var data = $(this).sortable('serialize');
+                    $.ajax({
+                        url: '/tracks/reorder',
+                        data : {_token:token,data:data},
+                        type: 'POST'
                     });
+                }
                 });
-            </script>
-        @endif
+            });
+        </script>
 
         <a href="/tracks/create" class="btn btn-primary">@lang('Lägg till spår')</a>
     @endcan

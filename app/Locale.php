@@ -11,6 +11,11 @@ class Locale extends Model
         return $this->hasMany('App\User');
     }
 
+    public function tracks()
+    {
+        return $this->hasMany('App\Track', 'default_locale_id');
+    }
+
     public $incrementing = false;
 
     protected $keyType = 'string';

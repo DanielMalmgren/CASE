@@ -17,6 +17,8 @@ class CreateTracksTable extends Migration
             $table->integer('id')->unsigned();
             $table->boolean('active')->default(true);
             $table->primary('id');
+            $table->string('default_locale_id')->default('sv_SE');
+            $table->foreign('default_locale_id')->references('id')->on('locales');
             //$table->string('name'); //Moved to track_translations to be localized
             $table->timestamps();
         });

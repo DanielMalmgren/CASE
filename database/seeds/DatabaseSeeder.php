@@ -19,13 +19,11 @@ class DatabaseSeeder extends Seeder
 
         $this->call(WorkplaceSeeder::class);
 
-        $this->call(TrackSeeder::class);
-
         $this->call(LocaleSeeder::class);
 
-        $this->call(RolesAndPermissionsSeeder::class);
+        $this->call(TrackSeeder::class);
 
-        $this->call(ProjectTimeTypeSeeder::class);
+        $this->call(RolesAndPermissionsSeeder::class);
 
         if(App::environment('lab') || App::environment('dev')) {
             $this->call(LessonSeeder::class);

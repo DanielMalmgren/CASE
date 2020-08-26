@@ -1,17 +1,6 @@
 
 <script>
     $(function() {
-        $('body').on( 'click', 'a#logout', function( event ) {
-            //window.location.replace("/logout");
-            var wnd = window.open("{{env('SAML2_IDP_HOST')}}/wa/logout");
-            //wnd.close();
-            setTimeout(function() {
-                wnd.close(); // detta och raden under körs efter 3 sekunder
-                window.location.replace("/logout");
-            }, 100);
-            return false;
-        });
-
         $('.global-search').select2({
             width: '200px',
             placeholder: "@lang('Sök')",
@@ -45,43 +34,38 @@
         <!--Main Menu HTML Code-->
         <nav class="wsmenu clearfix">
             <ul class="wsmenu-list">
-                @hasanyrole('Registrerad|Admin')
-                    <li aria-haspopup="false"><a href="/" class="menuhomeicon {{ request()->is('/') ? 'active' : '' }}"><i class="fa fa-home"></i><span class="hometext">&nbsp;&nbsp;@lang('Hem')</span></a></li>
-                    <li aria-haspopup="false"><a href="/tracks" class="{{ request()->is('tracks') ? 'active' : '' }}"></i>@lang('Spår')</a></li>
-                    @if (session()->has('authnissuer'))
-                        <li aria-haspopup="true"><a href="#"><i class="fa fa-angle-right"></i>@lang('Administration')</a>
-                            <ul class="sub-menu">
-                                @can('use administration')
-                                    @can('manage users')
-                                        <li aria-haspopup="false"><a href="/users">@lang('Användare')</a></li>
-                                    @endcan
-                                    @canany(['add workplaces','edit workplaces'])
-                                        <li aria-haspopup="false"><a href="/workplace">@lang('Arbetsplatsinställningar')</a></li>
-                                    @endcanany
-                                    <li aria-haspopup="false"><a href="/projecttime/create">@lang('Registrera projekttid')</a></li>
-                                    <li aria-haspopup="false"><a href="/timeattest/create">@lang('Attestera projekttid')</a></li>
-                                    @hasrole('Admin')
-                                        <li aria-haspopup="false"><a href="/poll">@lang('Hantera enkäter')</a></li>
-                                    @endhasrole
-                                    @can('export ESF report')
-                                        <li aria-haspopup="false"><a href="/timesummary">@lang('Sammanställning till ESF')</a></li>
-                                    @endcan
+                <li aria-haspopup="false"><a href="/" class="menuhomeicon {{ request()->is('/') ? 'active' : '' }}"><i class="fa fa-home"></i><span class="hometext">&nbsp;&nbsp;@lang('Hem')</span></a></li>
+                <li aria-haspopup="false"><a href="/tracks" class="{{ request()->is('tracks') ? 'active' : '' }}"></i>@lang('Spår')</a></li>
+                @hasrole('Admin2')
+                    <li aria-haspopup="true"><a href="#"><i class="fa fa-angle-right"></i>@lang('Administration')</a>
+                        <ul class="sub-menu">
+                            @can('use administration')
+                                @can('manage users')
+                                    <li aria-haspopup="false"><a href="/users">@lang('Användare')</a></li>
                                 @endcan
-                                <li aria-haspopup="false"><a href="/statistics">@lang('Statistik')</a></li>
-                            </ul>
-                        </li>
-                    @endif
+                                @canany(['add workplaces','edit workplaces'])
+                                    <li aria-haspopup="false"><a href="/workplace">@lang('Arbetsplatsinställningar')</a></li>
+                                @endcanany
+                                @hasrole('Admin')
+                                    <li aria-haspopup="false"><a href="/poll">@lang('Hantera enkäter')</a></li>
+                                @endhasrole
+                            @endcan
+                            <li aria-haspopup="false"><a href="/statistics">@lang('Statistik')</a></li>
+                        </ul>
+                    </li>
+                @endhasrole
+                @auth
                     <li aria-haspopup="true"><a href="#"><i class="fa fa-angle-right"></i>{{Auth::user()->firstname}}</a>
                         <ul class="sub-menu">
                             <li aria-haspopup="false"><a href="/settings">@lang('Inställningar')</a></li>
                             <li aria-haspopup="false"><a href="/feedback">@lang('Feedback')</a></li>
-                            <li aria-haspopup="false"><a href="/projecttime/createsingleuser">@lang('Registrera projekttid')</a></li>
-                            <li aria-haspopup="false"><a href="/timeattestlevel1/create">@lang('Attestera projekttid')</a></li>
-                            <li aria-haspopup="false"><a href="/users/{{Auth::user()->id}}">@lang('Statistik')</a></li>
-                            <li aria-haspopup="false"><a href="#" id="logout">@lang('Logga ut')</a></li>
+                            <li aria-haspopup="false"><a href="/logout" id="logout">@lang('Logga ut')</a></li>
                         </ul>
                     </li>
-                @endhasanyrole
+                @endauth
+                @guest
+                    <li aria-haspopup="false"><a href="/login">@lang('Logga in')</a></li>
+                @endguest
                 <li aria-haspopup="true"><a href="#"><i class="fa fa-angle-right"></i>@lang('Hjälp')</a>
                     <ul class="sub-menu">
                         <li aria-haspopup="false"><a target="_blank" href="/pdf/Evikomp%20användarmanual.pdf">@lang('Användarmanual')</a></li>
@@ -94,9 +78,7 @@
                         <li aria-haspopup="false"><a target="_blank" href="https://www.linkoping.se/utforarwebben/vard-stod-och-omsorg/forskning-och-utveckling/pagaende-projekt/evikomp/">@lang('Om Evikomp')</a></li>
                     </ul>
                 </li>
-                @hasanyrole('Registrerad|Admin')
-                    <li class="search-wrapper" aria-haspopup="false"><select class="global-search"></select></li>
-                @endhasanyrole
+                <li class="search-wrapper" aria-haspopup="false"><select class="global-search"></select></li>
             </ul>
         </nav>
         <!--Menu HTML Code-->

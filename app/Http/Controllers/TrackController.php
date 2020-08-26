@@ -5,49 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Track;
+use App\Locale;
 use PDF;
 
 class TrackController extends Controller
 {
     public function index(Request $request) {
-        if($request->showall) {
-            if(Auth::user()->can('list all lessons')) {
-                $tracks = Track::orderBy('order')->get();
-            } else {
-                $tracks = Track::where('active', 1)->orderBy('order')->get();
-            }
-        } else if(isset(Auth::user()->workplace)){
-            $tracks = Auth::user()->tracks->merge(Auth::user()->workplace->tracks)->sortBy('order');
-        } else {
-            $tracks = collect([]);
-        }
+        $tracks = Track::orderBy('order')->get();
 
         $data = [
             'tracks' => $tracks,
-            'showall' => $request->showall,
         ];
         return view('tracks.index')->with($data);
     }
 
     public function show(Track $track) {
-        if(Auth::user()->can('list all lessons')) {
-            $lessons = $track->lessons->sortBy('order');
-        } else {
-            $title = Auth::user()->title;
-
-            $lessons = $track->lessons()->where('active', true)
-            //->whereHas('tracks', function ($query) use ($track) {
-            //    $query->where('id', $track->id);
-            //})
-                ->where(static function ($query) use ($title) {
-                    $query->whereHas('titles', static function ($query) use ($title) {
-                        $query->where('id', $title->id);
-                    })
-                ->orWhere('limited_by_title', false);
-                })
-                ->orderBy('order')->get();
-
-        }
+        $lessons = $track->lessons->sortBy('order');
         $data = [
             'track' => $track,
             'lessons' => $lessons,
@@ -67,7 +40,10 @@ class TrackController extends Controller
     }
 
     public function create() {
-        return view('tracks.create');
+        $data = [
+            'locales' => Locale::orderBy('name')->get(),
+        ];
+        return view('tracks.create')->with($data);
     }
 
     public function store(Request $request) {
@@ -81,6 +57,7 @@ class TrackController extends Controller
 
         $track = new Track();
         $track->id = Track::max('id')+1;
+        $track->default_locale_id = $request->locale;
         $track->save();
 
         return $this->update($request, $track);
@@ -89,6 +66,7 @@ class TrackController extends Controller
     public function edit(Track $track) {
         $data = [
             'track' => $track,
+            'locales' => Locale::orderBy('name')->get(),
         ];
         return view('tracks.edit')->with($data);
     }

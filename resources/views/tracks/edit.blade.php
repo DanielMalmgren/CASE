@@ -21,6 +21,19 @@
         </div>
 
         <div class="mb-3">
+            <label for="locale">@lang('Standardspråk')</label>
+            <select class="custom-select d-block w-100" name="locale" disabled>
+                @foreach($locales as $locale)
+                    @if($track->default_locale_id == $locale->id)
+                        <option value="{{$locale->id}}" selected>{{$locale->name}}</option>
+                    @else
+                        <option value="{{$locale->id}}">{{$locale->name}}</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3">
             <input type="hidden" name="active" value="0">
             <label><input type="checkbox" name="active" value="1" {{$track->active?"checked":""}}>@lang('Aktiv')</label>
         </div>

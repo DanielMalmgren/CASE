@@ -34,7 +34,7 @@
 
                     <div id="response_toption[{{$response_option->id}}]" data-id="{{$response_option->id}}" class="card">
                         <div class="card-body">
-                            @if(locale_is_default())
+                            @if($question->lesson->track->current_locale_is_track_default())
                                 <a href="#" class="close remove_field" data-dismiss="alert" aria-label="close">&times;</a>
                             @endif
                             <input name="response_option_text[{{$response_option->id}}]" class="form-control original-content" value="{{$response_option->translateOrDefault(App::getLocale())->text}}">
@@ -47,7 +47,7 @@
             @endif
             </div>
 
-            @if(locale_is_default())
+            @if($question->lesson->track->current_locale_is_track_default())
                 <br>
                 <div id="add_alternative_button" class="btn btn-primary" style="margin-bottom:15px" type="text">@lang('Lägg till ett svarsalternativ')</div>
             @endif

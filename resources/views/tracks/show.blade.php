@@ -16,7 +16,7 @@
     @endif
 
     @can('manage lessons')
-        @if(locale_is_default())
+        @if($track->current_locale_is_track_default())
             <a href="/lessons/create/{{$track->id}}" class="btn btn-primary">@lang('Lägg till lektion')</a>
         @endif
 

@@ -20,6 +20,15 @@
         </div>
 
         <div class="mb-3">
+            <label for="locale">@lang('Standardspråk')</label>
+            <select class="custom-select d-block w-100" name="locale">
+                @foreach($locales as $locale)
+                    <option value="{{$locale->id}}">{{$locale->name}}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3">
             <input type="hidden" name="active" value="0">
             <label><input type="checkbox" name="active" value="1">@lang('Aktiv')</label>
         </div>

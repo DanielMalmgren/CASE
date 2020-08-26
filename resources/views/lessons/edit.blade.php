@@ -69,7 +69,7 @@
 
     $(function() {
 
-        @if(locale_is_default())
+        @if($lesson->track->current_locale_is_track_default())
             var wrapper = $("#contents_wrap");
             var add_button = $("#add_content_button");
             var new_id = 0;
@@ -193,7 +193,7 @@
                             <div class="card-body">
                                 <span class="handle"><i class="fas fa-arrows-alt-v"></i></span>
                                 <label class="handle" for="vimeo[{{$content->id}}]">@lang('Vimeo-film')</label>
-                                @if(locale_is_default())
+                                @if($lesson->track->current_locale_is_track_default())
                                     <a href="#" class="close remove_field" data-dismiss="alert" aria-label="close">&times;</a>
                                 @endif
                                 <input name="vimeo[{{$content->id}}]" class="form-control original-content" value="{{$content->content}}">
@@ -211,7 +211,7 @@
                                         (@lang('Översatt innehåll saknas - visar innehåll från standardspråk'))
                                     @endif
                                 </label>
-                                @if(locale_is_default())
+                                @if($lesson->track->current_locale_is_track_default())
                                     <a href="#" class="close remove_field" data-dismiss="alert" data-translations="{{$content->translations()->count()}}" aria-label="close">&times;</a>
                                 @endif
                                 <textarea rows="4" name="html[{{$content->id}}]" class="form-control twe original-content">{!!$content->translateOrDefault(App::getLocale())->text!!}</textarea>
@@ -230,7 +230,7 @@
                                         (@lang('Översatt innehåll saknas - visar innehåll från standardspråk'))
                                     @endif
                                 </label>
-                                @if(locale_is_default())
+                                @if($lesson->track->current_locale_is_track_default())
                                     <a href="#" class="close remove_field" data-dismiss="alert" data-translations="{{$content->translations()->count()}}" aria-label="close">&times;</a>
                                 @endif
                                 <input readonly name="audio[{{$content->id}}]" class="form-control original-content" value="{{$content->filename()}}">
@@ -249,7 +249,7 @@
                                         (@lang('Översatt innehåll saknas - visar innehåll från standardspråk'))
                                     @endif
                                 </label>
-                                @if(locale_is_default())
+                                @if($lesson->track->current_locale_is_track_default())
                                     <a href="#" class="close remove_field" data-dismiss="alert" data-translations="{{$content->translations()->count()}}" aria-label="close">&times;</a>
                                 @endif
                                 <input readonly name="office[{{$content->id}}]" class="form-control original-content" value="{{$content->filename()}}">
@@ -268,7 +268,7 @@
                                         (@lang('Översatt innehåll saknas - visar innehåll från standardspråk'))
                                     @endif
                                 </label>
-                                @if(locale_is_default())
+                                @if($lesson->track->current_locale_is_track_default())
                                     <a href="#" class="close remove_field" data-dismiss="alert" data-translations="{{$content->translations()->count()}}" aria-label="close">&times;</a>
                                 @endif
                                 <input readonly name="image[{{$content->id}}]" class="form-control original-content" value="{{$content->filename()}}">
@@ -287,7 +287,7 @@
                                         (@lang('Översatt innehåll saknas - visar innehåll från standardspråk'))
                                     @endif
                                 </label>
-                                @if(locale_is_default())
+                                @if($lesson->track->current_locale_is_track_default())
                                     <a href="#" class="close remove_field" data-dismiss="alert" data-translations="{{$content->translations()->count()}}" aria-label="close">&times;</a>
                                 @endif
                                 <input readonly name="file[{{$content->id}}]" class="form-control original-content" value="{{$content->filename()}}">
@@ -305,7 +305,7 @@
 
         <br>
 
-        @if(locale_is_default())
+        @if($lesson->track->current_locale_is_track_default())
             <div class="row">
                 <div class="col-lg-4">
                     <label for="locale">@lang('Typ av innehåll att lägga till')</label>

@@ -2,11 +2,11 @@
 
 Auth::routes();
 
-Route::get('/unsecurelogin',                    'HomeController@unsecurelogin');
+Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::get('/',                                 'HomeController@index');
 Route::get('/about',                            'HomeController@about');
-Route::get('/logout',                           'HomeController@logout');
+//Route::get('/logout',                           'HomeController@logout');
 
 //TrackController
 Route::get('/tracks/create',                    'TrackController@create')->middleware('permission:manage lessons');

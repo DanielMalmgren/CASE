@@ -21,10 +21,8 @@ $factory->define(App\User::class, function (Faker $faker) {
         'firstname' => $firstname,
         'lastname' => $lastname,
         'email' => $faker->unique()->safeEmail,
-        //'password' => '', // secret
+        'password' => '', // secret
         //'remember_token' => str_random(10),
-        //'personid' => str_random(12),
-        'personid' => date("Ymd", $faker->unixTime($max = 'now')).$faker->randomNumber(4, true),
         'workplace_id' => rand(1, 6),
     ];
 });

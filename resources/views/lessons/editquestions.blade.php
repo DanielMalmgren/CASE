@@ -61,7 +61,7 @@
             @foreach($questions as $question)
                 <div class="card" id="id-{{$question->id}}" data-question_id="{{$question->id}}">
                     <div class="card-body">
-                        @if(locale_is_default())
+                        @if($lesson->track->current_locale_is_track_default())
                             <a href="#" class="close remove_question" data-dismiss="alert" aria-label="close">&times;</a>
                         @endif
                         <a href="/test/question/{{$question->id}}/edit">
@@ -75,7 +75,7 @@
 
     <br>
 
-    @if(locale_is_default())
+    @if($lesson->track->current_locale_is_track_default())
         <a href="/test/question/create?lesson_id={{$lesson->id}}" class="btn btn-primary">@lang('Lägg till fråga')</a>
     @endif
 

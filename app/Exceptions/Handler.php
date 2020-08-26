@@ -43,14 +43,4 @@ class Handler extends ExceptionHandler
         parent::report($exception);
     }
 
-    protected function unauthenticated($request, AuthenticationException $exception)
-    {
-        if ($request->expectsJson())
-        {
-            return response()->json(['error' => 'Unauthenticated.'], 401);
-        }
-
-        return Saml2Auth::login();
-    }
-
 }
