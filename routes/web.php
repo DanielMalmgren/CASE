@@ -9,14 +9,14 @@ Route::get('/about',                            'HomeController@about');
 //Route::get('/logout',                           'HomeController@logout');
 
 //TrackController
-Route::get('/tracks/create',                    'TrackController@create')->middleware('permission:manage lessons');
-Route::post('/tracks',                          'TrackController@store')->middleware('permission:manage lessons');
+Route::get('/tracks/create',                    'TrackController@create')->middleware('permission:manage tracks');
+Route::post('/tracks',                          'TrackController@store')->middleware('permission:manage tracks');
 Route::get('/tracks',                           'TrackController@index');
 Route::get('/tracks/{track}',                   'TrackController@show');
-Route::get('/tracks/{track}/edit',              'TrackController@edit')->middleware('permission:manage lessons');
-Route::put('/tracks/{track}',                   'TrackController@update')->middleware('permission:manage lessons');
+Route::get('/tracks/{track}/edit',              'TrackController@edit')->middleware('permission:manage tracks');
+Route::put('/tracks/{track}',                   'TrackController@update')->middleware('permission:manage tracks');
 Route::get('/tracks/{track}/pdfdiploma',        'TrackController@pdfdiploma');
-Route::post('/tracks/reorder',                  'TrackController@reorder')->middleware('permission:manage lessons');
+Route::post('/tracks/reorder',                  'TrackController@reorder')->middleware('permission:manage tracks');
 
 //LessonController
 Route::get('/lessons/create/{track}',           'LessonController@create')->middleware('permission:manage lessons');
@@ -55,6 +55,8 @@ Route::post('/feedback',                        'FeedbackController@post');
 //UsersControler
 Route::get('/users/create',                     'UsersController@create')->middleware('permission:manage users');
 Route::get('/users/{user}',                     'UsersController@show');
+Route::get('/users/{user}/edit',                'UsersController@edit')->middleware('permission:manage users');
+Route::put('users/{user}',                      'UsersController@update')->middleware('permission:manage users');
 Route::post('/users',                           'UsersController@store')->middleware('permission:manage users');
 Route::get('/users',                            'UsersController@index')->middleware('permission:manage users');
 //Route::get('/exportusers',                      'UsersController@export')->middleware('permission:manage users');

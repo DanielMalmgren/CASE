@@ -36,21 +36,23 @@
             <ul class="wsmenu-list">
                 <li aria-haspopup="false"><a href="/" class="menuhomeicon {{ request()->is('/') ? 'active' : '' }}"><i class="fa fa-home"></i><span class="hometext">&nbsp;&nbsp;@lang('Hem')</span></a></li>
                 <li aria-haspopup="false"><a href="/tracks" class="{{ request()->is('tracks') ? 'active' : '' }}"></i>@lang('Spår')</a></li>
-                @hasrole('Admin2')
+                @hasrole('Admin')
                     <li aria-haspopup="true"><a href="#"><i class="fa fa-angle-right"></i>@lang('Administration')</a>
                         <ul class="sub-menu">
                             @can('use administration')
                                 @can('manage users')
                                     <li aria-haspopup="false"><a href="/users">@lang('Användare')</a></li>
                                 @endcan
+                                {{--
                                 @canany(['add workplaces','edit workplaces'])
                                     <li aria-haspopup="false"><a href="/workplace">@lang('Arbetsplatsinställningar')</a></li>
                                 @endcanany
                                 @hasrole('Admin')
                                     <li aria-haspopup="false"><a href="/poll">@lang('Hantera enkäter')</a></li>
                                 @endhasrole
+                                --}}
                             @endcan
-                            <li aria-haspopup="false"><a href="/statistics">@lang('Statistik')</a></li>
+                            {{--<li aria-haspopup="false"><a href="/statistics">@lang('Statistik')</a></li>--}}
                         </ul>
                     </li>
                 @endhasrole

@@ -1,20 +1,15 @@
 @extends('layouts.app')
 
-@section('title', __('Skapa användare manuellt'))
+@section('title', __('Skapa användare'))
 
 @section('content')
 
 <div class="col-md-5 mb-3">
 
-    <H1>@lang('Skapa användare manuellt')</H1>
+    <H1>@lang('Skapa användare')</H1>
 
     <form method="post" name="settings" action="{{action('UsersController@store')}}" accept-charset="UTF-8">
         @csrf
-
-        <div class="mb-3">
-            <label for="personid">@lang('Personnummer')</label>
-            <input required type="text" name="personid" class="form-control" id="personid" placeholder="yyyymmddxxxx"  value="{{old('personid')}}">
-        </div>
 
         <div class="mb-3">
             <div class="row container">
@@ -32,6 +27,11 @@
         <div class="mb-3">
             <label for="email">@lang('E-postadress')</label>
             <input required type="email" name="email" class="form-control" id="email" placeholder="fornamn.efternamn@kommun.se"  value="{{old('email')}}">
+        </div>
+
+        <div class="mb-3">
+            <input type="hidden" name="lesson_editor" value="0">
+            <label><input type="checkbox" name="lesson_editor" value="1">@lang('Lektionsredaktör')</label>
         </div>
 
         <div class="mb-3">

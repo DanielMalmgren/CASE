@@ -26,7 +26,7 @@
         @lang('Det finns inga spår!')
     @endif
 
-    @can('manage lessons')
+    @can('manage tracks')
         <script type="text/javascript" language="javascript" src="{{asset('vendor/jquery-ui-1.12.1.custom/jquery-ui.min.js')}}"></script>
         <script type="text/javascript">
             $(function() {
