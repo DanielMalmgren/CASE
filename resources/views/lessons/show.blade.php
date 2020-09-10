@@ -70,15 +70,15 @@
 
     <br>
 
-    @if ($question)
+    {{--@if ($question)
         <a href="/test/{{$lesson->id}}" class="btn btn-primary">@lang('Fortsätt till testet')</a>
     @else
         <a href="/lessons/{{$lesson->id}}/finish" class="btn btn-primary">@lang('Färdig med denna lektion')</a>
-    @endif
+    @endif--}}
 
     @can('manage lessons')
         <a href="/lessons/{{$lesson->id}}/edit" class="btn btn-primary">@lang('Redigera lektionen')</a>
-        <a href="/lessons/{{$lesson->id}}/editquestions" class="btn btn-primary">@lang('Redigera frågor för lektion')</a>
+        {{--<a href="/lessons/{{$lesson->id}}/editquestions" class="btn btn-primary">@lang('Redigera frågor för lektion')</a>--}}
         <a href="/lessons/{{$lesson->id}}/replicate" class="btn btn-primary">@lang('Kopiera lektionen')</a>
     @endcan
 

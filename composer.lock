@@ -67,26 +67,26 @@
         },
         {
             "name": "astrotomic/laravel-translatable",
-            "version": "v11.8.3",
+            "version": "v11.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Astrotomic/laravel-translatable.git",
-                "reference": "104f9501bf94738b6d82984685010e3d8040e891"
+                "reference": "85a36a4c909fa1b5c800f50f91b96b433bdbfd2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Astrotomic/laravel-translatable/zipball/104f9501bf94738b6d82984685010e3d8040e891",
-                "reference": "104f9501bf94738b6d82984685010e3d8040e891",
+                "url": "https://api.github.com/repos/Astrotomic/laravel-translatable/zipball/85a36a4c909fa1b5c800f50f91b96b433bdbfd2c",
+                "reference": "85a36a4c909fa1b5c800f50f91b96b433bdbfd2c",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "5.8.* || ^6.0 || ^7.0",
-                "illuminate/database": "5.8.* || ^6.0 || ^7.0",
-                "illuminate/support": "5.8.* || ^6.0 || ^7.0",
+                "illuminate/contracts": "5.8.* || ^6.0 || ^7.0 || ^8.0",
+                "illuminate/database": "5.8.* || ^6.0 || ^7.0 || ^8.0",
+                "illuminate/support": "5.8.* || ^6.0 || ^7.0 || ^8.0",
                 "php": ">=7.2"
             },
             "require-dev": {
-                "orchestra/testbench": "3.8.* || ^4.0 || ^5.0",
+                "orchestra/testbench": "3.8.* || ^4.0 || ^5.0 || ^6.0",
                 "phpunit/phpunit": "^8.0 || ^9.0"
             },
             "type": "library",
@@ -142,7 +142,7 @@
                     "type": "issuehunt"
                 }
             ],
-            "time": "2020-07-08T17:21:18+00:00"
+            "time": "2020-09-09T19:37:03+00:00"
         },
         {
             "name": "balping/json-raw-encoder",
@@ -1705,16 +1705,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v7.27.0",
+            "version": "v7.28.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "17777a92da9b3cf0026f26462d289d596420e6d0"
+                "reference": "f7493ab717ca2a9598b1db2d6a3bae8ac8c755e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/17777a92da9b3cf0026f26462d289d596420e6d0",
-                "reference": "17777a92da9b3cf0026f26462d289d596420e6d0",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/f7493ab717ca2a9598b1db2d6a3bae8ac8c755e8",
+                "reference": "f7493ab717ca2a9598b1db2d6a3bae8ac8c755e8",
                 "shasum": ""
             },
             "require": {
@@ -1859,7 +1859,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2020-09-01T13:41:48+00:00"
+            "time": "2020-09-09T15:02:46+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1927,16 +1927,16 @@
         },
         {
             "name": "laravel/ui",
-            "version": "v2.2.0",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/ui.git",
-                "reference": "fb1404f04ece6eee128e3fb750d3a1e064238b33"
+                "reference": "2ccaa3b821ea8ac7e05393b946d0578bdb46099b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/ui/zipball/fb1404f04ece6eee128e3fb750d3a1e064238b33",
-                "reference": "fb1404f04ece6eee128e3fb750d3a1e064238b33",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/2ccaa3b821ea8ac7e05393b946d0578bdb46099b",
+                "reference": "2ccaa3b821ea8ac7e05393b946d0578bdb46099b",
                 "shasum": ""
             },
             "require": {
@@ -1978,7 +1978,7 @@
                 "laravel",
                 "ui"
             ],
-            "time": "2020-08-25T18:30:43+00:00"
+            "time": "2020-09-09T12:07:59+00:00"
         },
         {
             "name": "league/commonmark",
@@ -7202,16 +7202,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "1.10.10",
+            "version": "1.10.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "32966a3b1d48bc01472a8321fd6472b44fad033a"
+                "reference": "47c841ba3b2d3fc0b4b13282cf029ea18b66d78b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/32966a3b1d48bc01472a8321fd6472b44fad033a",
-                "reference": "32966a3b1d48bc01472a8321fd6472b44fad033a",
+                "url": "https://api.github.com/repos/composer/composer/zipball/47c841ba3b2d3fc0b4b13282cf029ea18b66d78b",
+                "reference": "47c841ba3b2d3fc0b4b13282cf029ea18b66d78b",
                 "shasum": ""
             },
             "require": {
@@ -7292,20 +7292,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-08-03T09:35:19+00:00"
+            "time": "2020-09-09T09:46:34+00:00"
         },
         {
             "name": "composer/semver",
-            "version": "1.5.1",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "c6bea70230ef4dd483e6bbcab6005f682ed3a8de"
+                "reference": "114f819054a2ea7db03287f5efb757e2af6e4079"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/c6bea70230ef4dd483e6bbcab6005f682ed3a8de",
-                "reference": "c6bea70230ef4dd483e6bbcab6005f682ed3a8de",
+                "url": "https://api.github.com/repos/composer/semver/zipball/114f819054a2ea7db03287f5efb757e2af6e4079",
+                "reference": "114f819054a2ea7db03287f5efb757e2af6e4079",
                 "shasum": ""
             },
             "require": {
@@ -7353,7 +7353,21 @@
                 "validation",
                 "versioning"
             ],
-            "time": "2020-01-13T12:06:48+00:00"
+            "funding": [
+                {
+                    "url": "https://packagist.com",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/composer",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-09-09T09:34:06+00:00"
         },
         {
             "name": "composer/spdx-licenses",

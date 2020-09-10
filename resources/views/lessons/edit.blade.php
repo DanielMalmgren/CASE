@@ -172,7 +172,7 @@
             <label><input type="checkbox" name="active" value="1" {{$lesson->active?"checked":""}}>@lang('Aktiv')</label>
         </div>
 
-        <div class="mb-3">
+        {{--<div class="mb-3">
             <input type="hidden" name="limited_by_title" value="0">
             <label><input type="checkbox" name="limited_by_title" id="limited_by_title" value="1" {{$lesson->limited_by_title?"checked":""}}>@lang('Begränsad enbart till vissa befattningar')</label>
         </div>
@@ -181,7 +181,7 @@
             @foreach($titles as $title)
                 <label><input type="checkbox" {{$lesson->titles->contains('id', $title->id)?"checked":""}} name="titles[]" value="{{$title->id}}">{{$title->workplace_type->name}} - {{$title->name}}</label><br>
             @endforeach
-        </div>
+        </div>--}}
 
         <h2>@lang('Innehåll')</h2>
         <div id="contents_wrap">

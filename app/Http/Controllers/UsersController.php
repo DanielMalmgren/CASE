@@ -116,6 +116,12 @@ class UsersController extends Controller
         $user->password = Hash::make($request->pwd_cleartext);
         $user->save();
 
+        if($request->lesson_editor) {
+            $user->assignRole('lesson_editor');
+        } else {
+            $user->removeRole('lesson_editor');
+        }
+
         return redirect('/')->with('success', __('Användaren har skapats'));
     }
 
