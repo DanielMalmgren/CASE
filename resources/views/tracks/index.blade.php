@@ -11,12 +11,12 @@
             @foreach($tracks as $track)
                 <li class="list-group-item d-flex justify-content-between lh-condensed nopadding" id="id-{{$track->id}}">
                     <a href="/tracks/{{$track->id}}">
-                        <h6 class="my-0">{{$track->translateOrDefault(App::getLocale())->name}}
+                        <h6 class="my-0">{{$track->translation()->name}}
                             @if($track->active == 0)
                                 - inaktiv
                             @endif
                         </h6>
-                        <small class="text-muted">{{$track->translateOrDefault(App::getLocale())->subtitle}}</small>
+                        <small class="text-muted">{{$track->translation()->subtitle}}</small>
                     </a>
                 </li>
             @endforeach

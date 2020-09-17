@@ -49,6 +49,16 @@ class Track extends Model
     {
         return $this->lessons()->orderBy('order')->where('active', true)->where('order', '>', $last_lesson->order)->first();
     }
+
+    public function translation()
+    {
+        $translation = $this->translate(\App::getLocale());
+        if(isset($translation)) {
+            return $translation;
+        } else {
+            return $this->translate($this->default_locale->id);
+        }
+    }
 }
 
 class TrackTranslation extends Model
