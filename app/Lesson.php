@@ -47,6 +47,16 @@ class Lesson extends Model
         return $this->lesson_results->sum('rating');
     }
 
+    public function translation()
+    {
+        $translation = $this->translate(\App::getLocale());
+        if(isset($translation)) {
+            return $translation;
+        } else {
+            return $this->translate($this->track->default_locale->id);
+        }
+    }
+
     public function scopeFinished($query, User $user=null)
     {
         if(!$user) {

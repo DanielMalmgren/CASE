@@ -12,12 +12,12 @@
 
         <div class="mb-3">
             <label for="name">@lang('Namn')</label>
-            <input name="name" class="form-control" id="name" value="{{$track->translateOrDefault(App::getLocale())->name}}">
+            <input name="name" class="form-control" id="name" value="{{$track->translation()->name}}">
         </div>
 
         <div class="mb-3">
             <label for="subtitle">@lang('Undertitel')</label>
-            <input name="subtitle" class="form-control" id="subtitle" value="{{$track->translateOrDefault(App::getLocale())->subtitle}}">
+            <input name="subtitle" class="form-control" id="subtitle" value="{{$track->translation()->subtitle}}">
         </div>
 
         <div class="mb-3">

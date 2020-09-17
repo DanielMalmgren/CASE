@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-10">
             <h5 class="mb-0">
-                {{$lesson->translateOrDefault(App::getLocale())->name}}
+                {{$lesson->translation()->name}}
                 @if($lesson->active == 0)
                     - inaktiv
                 @endif

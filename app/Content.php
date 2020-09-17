@@ -79,6 +79,16 @@ class Content extends Model
     public static function add_target_to_links($text) {
         return str_replace('<a href=', '<a target="_blank" href=', $text);
     }
+
+    public function translation()
+    {
+        $translation = $this->translate(\App::getLocale());
+        if(isset($translation)) {
+            return $translation;
+        } else {
+            return $this->translate($this->lesson->track->default_locale->id);
+        }
+    }
 }
 
 class ContentTranslation extends Model

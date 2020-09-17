@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', $lesson->translateOrDefault(App::getLocale())->name)
+@section('title', $lesson->translation()->name)
 
 @section('content')
 
 <script src="https://player.vimeo.com/api/player.js"></script>
 
-    <H1>{{$lesson->translateOrDefault(App::getLocale())->name}}</H1>
+    <H1>{{$lesson->translation()->name}}</H1>
 
     <div class="card">
         <div class="card-body">
@@ -31,7 +31,7 @@
                         @break
 
                     @case('html')
-                        {!!$content->translateOrDefault(App::getLocale())->text!!}
+                        {!!$content->translation()->text!!}
                         <br><br>
                         @break
 

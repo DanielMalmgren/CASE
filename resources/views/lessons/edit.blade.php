@@ -151,7 +151,7 @@
 
         <div class="mb-3">
             <label for="name">@lang('Namn')</label>
-            <input name="name" class="form-control" id="name" value="{{$lesson->translateOrDefault(App::getLocale())->name}}">
+            <input name="name" class="form-control" id="name" value="{{$lesson->translation()->name}}">
         </div>
 
         <div class="mb-3">
@@ -159,9 +159,9 @@
             <select class="custom-select d-block w-100" id="track" name="track" required="">
                 @foreach($tracks as $track)
                     @if($lesson->track_id == $track->id)
-                        <option selected value="{{$track->id}}">{{$track->translateOrDefault(App::getLocale())->name}}</option>
+                        <option selected value="{{$track->id}}">{{$track->translation()->name}}</option>
                     @else
-                        <option value="{{$track->id}}">{{$track->translateOrDefault(App::getLocale())->name}}</option>
+                        <option value="{{$track->id}}">{{$track->translation()->name}}</option>
                     @endif
                 @endforeach
             </select>
@@ -214,7 +214,7 @@
                                 @if($lesson->track->current_locale_is_track_default())
                                     <a href="#" class="close remove_field" data-dismiss="alert" data-translations="{{$content->translations()->count()}}" aria-label="close">&times;</a>
                                 @endif
-                                <textarea rows="4" name="html[{{$content->id}}]" class="form-control twe original-content">{!!$content->translateOrDefault(App::getLocale())->text!!}</textarea>
+                                <textarea rows="4" name="html[{{$content->id}}]" class="form-control twe original-content">{!!$content->translation()->text!!}</textarea>
                             </div>
                         </div>
                         @break
