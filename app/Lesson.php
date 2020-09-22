@@ -57,6 +57,26 @@ class Lesson extends Model
         }
     }
 
+    public function getPagesAttribute()
+    {
+        return $this->contents->where('type', 'pagebreak')->count();
+    }
+
+    public function page_heading(int $page)
+    {
+        return $this->contents->where('type', 'pagebreak')->sortBy('order')->skip($page-1)->first()->translation()->text;
+    }
+
+    function getFirstContentOnPage(int $page)
+    {
+        $pagebreak = $this->contents->where('type', 'pagebreak')->sortBy('order')->skip($page-1)->first();
+        if(isset($pagebreak)) {
+            return $this->contents->where('order', $pagebreak->order+1)->first()->order;
+        } else {
+            return 0;
+        }
+    }
+
     public function scopeFinished($query, User $user=null)
     {
         if(!$user) {

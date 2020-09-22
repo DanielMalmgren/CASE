@@ -4,6 +4,8 @@
 
 @section('content')
 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
 <script src="https://player.vimeo.com/api/player.js"></script>
 
     <H1>{{$lesson->translation()->name}}</H1>
@@ -12,7 +14,11 @@
         <div class="card-body">
 
             @if(count($lesson->contents) > 0)
-                @foreach($lesson->contents->sortBy('order') as $content)
+                @foreach($lesson->contents->sortBy('order')->skip($first_content_order) as $content)
+                @if($content->type == 'pagebreak')
+                    @break
+                @endif
+
                 @switch($content->type)
                     @case('vimeo')
                         <div style="max-width:250px">
@@ -28,6 +34,14 @@
                                 TimeMe.resetIdleCountdown();
                             });
                         </script>
+                        @break
+
+                   @case('youtube')
+                        <div style="max-width:250px">
+                            <div class="vimeo-container">
+                                <iframe id="youtube_{{$content->id}}" src="https://www.youtube.com/embed/{{$content->content}}" width="0" height="0" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                            </div>
+                        </div>
                         @break
 
                     @case('html')
@@ -70,6 +84,15 @@
 
     <br>
 
+    @if($pages > 1)
+        <a href="/lessons/{{$lesson->id}}/{{$page-1}}" class="btn btn-primary {{$page==1?'disabled':''}}"><i class="fas fa-chevron-left"></i></a>
+        @for ($p = 1; $p <= $pages; $p++)
+            <a href="/lessons/{{$lesson->id}}/{{$p}}" class="btn btn-primary {{$page==$p?'disabled':''}}">{{$lesson->page_heading($p)}}</a>
+        @endfor
+        <a href="/lessons/{{$lesson->id}}/{{$page+1}}" class="btn btn-primary {{$page==$pages?'disabled':''}}"><i class="fas fa-chevron-right"></i></a>
+        <br><br>
+    @endif
+
     {{--@if ($question)
         <a href="/test/{{$lesson->id}}" class="btn btn-primary">@lang('Fortsätt till testet')</a>
     @else
@@ -77,6 +100,7 @@
     @endif--}}
 
     @can('manage lessons')
+        <br><br>
         <a href="/lessons/{{$lesson->id}}/edit" class="btn btn-primary">@lang('Redigera lektionen')</a>
         {{--<a href="/lessons/{{$lesson->id}}/editquestions" class="btn btn-primary">@lang('Redigera frågor för lektion')</a>--}}
         <a href="/lessons/{{$lesson->id}}/replicate" class="btn btn-primary">@lang('Kopiera lektionen')</a>
