@@ -44,7 +44,7 @@ class Content extends Model
     }
 
     public function filename() {
-        $translation = $this->translateOrDefault(\App::getLocale());
+        $translation = $this->translation();
         if(isset($translation)) {
             return $translation->text;
         } else {
@@ -56,7 +56,7 @@ class Content extends Model
         if($this->translatedFileExists()) {
             return "/storage/files/".$this->id."/".\App::getLocale().'/';
         } else {
-            return "/storage/files/".$this->id."/".Config::get('app.fallback_locale').'/';
+            return "/storage/files/".$this->id."/".$this->lesson->track->default_locale->id.'/';
         }
     }
 
@@ -64,7 +64,7 @@ class Content extends Model
         if($this->translatedFileExists()) {
             return "/storage/files/".$this->id."/".\App::getLocale().'/'.$this->filename();
         } else {
-            return "/storage/files/".$this->id."/".Config::get('app.fallback_locale').'/'.$this->filename();
+            return "/storage/files/".$this->id."/".$this->lesson->track->default_locale->id.'/'.$this->filename();
         }
     }
 
@@ -80,7 +80,7 @@ class Content extends Model
         if($ignoreMissing || $this->translatedFileExists()) {
             return "public/files/".$this->id."/".\App::getLocale().'/';
         } else {
-            return "public/files/".$this->id."/".Config::get('app.fallback_locale').'/';
+            return "public/files/".$this->id."/".$this->lesson->track->default_locale->id.'/';
         }
     }
 
