@@ -67,11 +67,17 @@ class Lesson extends Model
         return $this->contents->where('type', 'pagebreak')->sortBy('order')->skip($page-1)->first()->translation()->text;
     }
 
+    //Return the order of the first content on the page
     function getFirstContentOnPage(int $page)
     {
         $pagebreak = $this->contents->where('type', 'pagebreak')->sortBy('order')->skip($page-1)->first();
         if(isset($pagebreak)) {
-            return $this->contents->where('order', $pagebreak->order+1)->first()->order;
+            $firstcontent = $this->contents->where('order', $pagebreak->order+1)->first();
+            if(isset($firstcontent)) {
+                return $firstcontent->order;
+            } else {
+                return 0;
+            }
         } else {
             return 0;
         }
