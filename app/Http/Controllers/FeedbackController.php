@@ -39,14 +39,13 @@ class FeedbackController extends Controller
             $name = Auth::user()->name;
             $email = Auth::user()->email;
             $mobile = Auth::user()->mobile;
-            $workplace = Auth::user()->workplace->name;
         } else {
             $name = __('Anonym användare');
             $email = env('MAIL_FROM_ADDRESS');
             $mobile = '';
-            $workplace = '';
         }
 
+        $workplace = '';
         $to = [];
         $to[] = ['email' => env('FEEDBACK_RECIPIENT_ADDRESS'), 'name' => env('FEEDBACK_RECIPIENT_NAME')];
 
