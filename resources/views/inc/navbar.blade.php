@@ -70,7 +70,7 @@
                 @endguest
                 <li aria-haspopup="true"><a href="#"><i class="fa fa-angle-right"></i>@lang('Hjälp')</a>
                     <ul class="sub-menu">
-                        <li aria-haspopup="false"><a target="_blank" href="/pdf/CASE%20users%20manual.pdf">@lang('Users manual')</a></li>
+                        <li aria-haspopup="false"><a target="_blank" href="/pdf/CASE%20users%20manual.pdf">@lang('Användarmanual')</a></li>
                         @can('edit lessons')
                             <li aria-haspopup="false"><a target="_blank" href="/pdf/CASE%20editors%20manual.pdf">@lang('Editors manual')</a></li>
                         @endcan
