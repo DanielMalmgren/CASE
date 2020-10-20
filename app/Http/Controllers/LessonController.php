@@ -9,6 +9,7 @@ use App\Question;
 use App\Title;
 use App\LessonResult;
 use App\Content;
+use App\ContentSetting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -170,12 +171,8 @@ class LessonController extends Controller
             'new_office.*' => 'file|mimetypes:application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.presentationml.presentation|max:10000',
             'new_image.*' => 'file|image|max:20000',
             'new_file.*' => 'file|max:20000',
-            'new_html.*' => 'string',
-            'new_pagebreak.*' => 'string',
-            'html.*' => 'string',
             'new_vimeo.*' => 'integer',
             'vimeo.*' => 'integer',
-            'pagebreak.*' => 'string',
         ],
         [
             'name.required' => __('Du måste ange ett namn på lektionen!'),
@@ -190,12 +187,8 @@ class LessonController extends Controller
             'new_office.*.max' => __('Din fil är för stor! Max-storleken är 10MB!'),
             'new_image.*.max' => __('Din fil är för stor! Max-storleken är 20MB!'),
             'new_file.*.max' => __('Din fil är för stor! Max-storleken är 20MB!'),
-            'new_html.*.string' => __('Du måste skriva någon text i textrutan!'),
-            'html.*.string' => __('Du måste skriva någon text i textrutan!'),
             'new_vimeo.*.integer' => __('Ett giltigt Vimeo-id har bara siffror!'),
             'vimeo.*.integer' => __('Ett giltigt Vimeo-id har bara siffror!'),
-            'pagebreak.*.string' => __('Vänligen ange namn på din sidbrytning!'),
-            'new_pagebreak.*.string' => __('Vänligen ange namn på din sidbrytning!'),
         ]);
 
         $currentLocale = \App::getLocale();
@@ -204,6 +197,8 @@ class LessonController extends Controller
 
         //Store this in a local variable. We'll have to replace all the temporary id's in it for real ones before we do the ordering
         $content_order = $request->content_order;
+
+        $id_map = collect();
 
         //Loop through all changed html contents
         if($request->html) {
@@ -242,6 +237,7 @@ class LessonController extends Controller
             foreach($request->new_vimeo as $temp_key => $new_vimeo) {
                 $content = new Content('vimeo', $lesson->id, $new_vimeo);
                 $content_order = str_replace("[".$temp_key."]", "[".$content->id."]", $content_order);
+                $id_map->put($temp_key, $content->id);
                 logger("Vimeo content ".$content->id." is being added");
             }
         }
@@ -261,6 +257,7 @@ class LessonController extends Controller
             foreach($request->new_youtube as $temp_key => $new_youtube) {
                 $content = new Content('youtube', $lesson->id, $new_youtube);
                 $content_order = str_replace("[".$temp_key."]", "[".$content->id."]", $content_order);
+                $id_map->put($temp_key, $content->id);
                 logger("Youtube content ".$content->id." is being added");
             }
         }
@@ -291,6 +288,7 @@ class LessonController extends Controller
                 $content = new Content('image', $lesson->id, null, $new_image->getClientOriginalName());
                 $new_image->storeAs($content->filepath(true), $content->filename());
                 $content_order = str_replace("[".$temp_key."]", "[".$content->id."]", $content_order);
+                $id_map->put($temp_key, $content->id);
                 logger("Image content ".$content->id." is being added");
             }
         }
@@ -336,6 +334,25 @@ class LessonController extends Controller
                 $content = new Content('pagebreak', $lesson->id, null, $new_pagebreak);
                 $content_order = str_replace("[".$temp_key."]", "[".$content->id."]", $content_order);
                 logger("Page break ".$content->id." is being added");
+            }
+        }
+
+        //Loop through all settings
+        if($request->settings) {
+            foreach($request->settings as $content_id => $settings) {
+                foreach($settings as $key => $value) {
+                    if($id_map->has($content_id)) {
+                        ContentSetting::updateOrCreate(
+                            ['content_id' => $id_map->get($content_id), 'key' => $key],
+                            ['value' => $value]
+                        );
+                    } else {
+                        ContentSetting::updateOrCreate(
+                            ['content_id' => $content_id, 'key' => $key],
+                            ['value' => $value]
+                        );
+                    }
+                }
             }
         }
 

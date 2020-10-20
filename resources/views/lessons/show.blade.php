@@ -19,9 +19,11 @@
                     @break
                 @endif
 
+                <div class="clearfix">
+
                 @switch($content->type)
                     @case('vimeo')
-                        <div style="max-width:250px">
+                        <div class="{{$content->adjustment}}" style="width:100%;max-width:{{$content->max_width}}px">
                             <div class="vimeo-container">
                                 <iframe id="vimeo_{{$content->id}}" src="https://player.vimeo.com/video/{{$content->content}}" width="0" height="0" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
                             </div>
@@ -37,7 +39,7 @@
                         @break
 
                    @case('youtube')
-                        <div style="max-width:250px">
+                        <div class="{{$content->adjustment}}" style="width:100%;max-width:{{$content->max_width}}px">
                             <div class="vimeo-container">
                                 <iframe id="youtube_{{$content->id}}" src="https://www.youtube.com/embed/{{$content->content}}" width="0" height="0" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
                             </div>
@@ -45,7 +47,7 @@
                         @break
 
                     @case('html')
-                        {!!$content->translation()->text!!}
+                        {!!$content->text!!}
                         <br><br>
                         @break
 
@@ -63,7 +65,9 @@
                         @break
 
                     @case('image')
-                        <img class="lessonimage" src="{{$content->url()}}">
+                        <div class="{{$content->adjustment}}" style="max-width:{{$content->max_width}}px">
+                            <img class="lessonimage" src="{{$content->url()}}">
+                        </div>
                         <br>
                         @break
 
@@ -75,6 +79,8 @@
                     @default
                         Unexpected content type!
                 @endswitch
+
+                </div>
 
                 @endforeach
             @endif

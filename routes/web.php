@@ -63,36 +63,6 @@ Route::get('/users',                            'UsersController@index')->middle
 Route::delete('/user/{user}',                   'UsersController@destroy')->middleware('permission:manage users');
 Route::get('/select2users',                     'UsersController@select2');
 
-//ActiveTimeController
-Route::post('/activetime',                      'ActiveTimeController@store');
-
-//TimeSummaryController
-Route::get('/timesummary',                      'TimeSummaryController@show')->middleware('permission:export ESF report');
-Route::get('/timesummaryajax/{rel_month}',      'TimeSummaryController@ajax')->middleware('permission:export ESF report');
-Route::get('/timesummarywpdetails/{workplace}/{year}/{month}', 'TimeSummaryController@wpdetails')->middleware('permission:export ESF report');
-Route::get('/exporttimesummary',                'TimeSummaryController@export')->middleware('permission:export ESF report');
-
-//ProjectTimeController
-Route::get('/projecttime',                      'ProjectTimeController@index');
-Route::get('/projecttime/create',               'ProjectTimeController@create')->middleware('permission:edit workplaces');
-Route::get('/projecttime/createsingleuser',     'ProjectTimeController@createsingleuser');
-Route::post('/projecttime',                     'ProjectTimeController@store');
-Route::get('/projecttime/{project_time}/edit',  'ProjectTimeController@edit');
-Route::put('/projecttime/{project_time}',       'ProjectTimeController@update');
-Route::get('/projecttimeajax/{workplace}',      'ProjectTimeController@ajax');
-Route::get('/projecttime/{year}/{month}',       'ProjectTimeController@show');
-
-//TimeAttestController
-Route::get('/timeattest/create',                'TimeAttestController@create')->middleware('permission:manage time attests');
-Route::post('/timeattest',                      'TimeAttestController@store')->middleware('permission:manage time attests');
-Route::get('/timeattestajaxuserlist/{workplace}/{year}/{month}', 'TimeAttestController@ajaxuserlist')->middleware('permission:manage time attests');
-Route::get('/timeattestajaxuserdetails/{user}/{year}/{month}', 'TimeAttestController@ajaxuserdetails')->middleware('permission:manage time attests');
-
-//TimeAttestLevel1Controller
-Route::get('/timeattestlevel1/create',          'TimeAttestLevel1Controller@create');
-Route::post('/timeattestlevel1',                'TimeAttestLevel1Controller@store');
-Route::get('/manualattestxls',                  'TimeAttestLevel1Controller@manualattestxls');
-
 //FirstLoginController
 Route::get('/firstlogin',                       'FirstLoginController@show');
 Route::post('storefirstloginlanguage',          'FirstLoginController@storeLanguage');

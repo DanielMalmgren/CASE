@@ -64,7 +64,12 @@ class Lesson extends Model
 
     public function page_heading(int $page)
     {
-        return $this->contents->where('type', 'pagebreak')->sortBy('order')->skip($page-1)->first()->translation()->text;
+        $content_locale = $this->contents->where('type', 'pagebreak')->sortBy('order')->skip($page-1)->first()->translation();
+        if(isset($content_locale)) {
+            return $content_locale->text;
+        } else {
+            return __('Sida ').$page;
+        }
     }
 
     //Return the order of the first content on the page

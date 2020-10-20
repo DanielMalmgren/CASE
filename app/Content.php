@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Config;
+use App\ContentSetting;
 
 class Content extends Model
 {
@@ -37,6 +38,31 @@ class Content extends Model
     public function lesson()
     {
         return $this->belongsTo('App\Lesson');
+    }
+
+    public function content_settings()
+    {
+        return $this->hasMany('App\ContentSetting');
+    }
+
+    public function getMaxWidthAttribute()
+    {
+        $valueobj = $this->content_settings->where('key', 'max_width')->first();
+        if(isset($valueobj)) {
+            return $valueobj->value;
+        } else {
+            return '250';
+        }
+    }
+
+    public function getAdjustmentAttribute()
+    {
+        $valueobj = $this->content_settings->where('key', 'adjustment')->first();
+        if(isset($valueobj)) {
+            return $valueobj->value;
+        } else {
+            return 'left';
+        }
     }
 
     public function translatedFileExists() {
@@ -95,6 +121,16 @@ class Content extends Model
             return $translation;
         } else {
             return $this->translate($this->lesson->track->default_locale->id);
+        }
+    }
+
+    public function getTextAttribute()
+    {
+        $translation = $this->translation();
+        if(isset($translation)) {
+            return $translation->text;
+        } else {
+            return '';
         }
     }
 }
