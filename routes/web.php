@@ -36,6 +36,10 @@ Route::delete('/lessons/{lesson}',              'LessonController@destroy')->mid
 Route::get('/test/{lesson}',                    'TestController@show');
 Route::post('/test/storeResponse',              'TestController@store');
 
+//TestResultController
+Route::get('/test/{test_session}/pdfdiploma',   'TestResultController@pdfdiploma');
+Route::get('/test/{test_session}/resultmail',   'TestResultController@resultmail');
+
 //QuestionController
 Route::get('/test/question/create',             'QuestionController@create')->middleware('permission:manage lessons');
 Route::post('/test/question',                   'QuestionController@store')->middleware('permission:manage lessons');

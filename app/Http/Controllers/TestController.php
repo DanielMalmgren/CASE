@@ -15,7 +15,7 @@ class TestController extends Controller
     public function show(Lesson $lesson) {
         $test_session = new TestSession();
         $test_session->lesson_id = $lesson->id;
-        $test_session->user_id = Auth::user()->id;
+        //$test_session->user_id = Auth::user()->id;
         $test_session->save();
 
         $lesson->times_test_started++;
@@ -45,7 +45,7 @@ class TestController extends Controller
             $lesson->times_finished++;
             $lesson->save();
 
-            if($test_session->percent() == 100) {
+            /*if($test_session->percent() == 100) {
                 $lesson_result = LessonResult::updateOrCreate(
                     ['user_id' => $test_session->user_id, 'lesson_id' => $test_session->lesson_id]
                 );
@@ -53,7 +53,7 @@ class TestController extends Controller
                     $lesson_result->personal_best_percent = $test_session->percent();
                     $lesson_result->save();
                 }
-            }
+            }*/
 
             return redirect('/test/result/'.$test_session->id);
         }

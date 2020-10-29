@@ -43,17 +43,20 @@
                 @lang('Inte riktigt alla rätt rakt igenom. Klicka på knappen nedan för att gå tilbaka till lektionen och repetera.')
                 <br><br>
                 <a href="/lessons/{{$lesson->id}}" class="btn btn-primary">@lang('Tillbaka till lektionen')</a>
-            @elseif(isset($nextlesson))
+            {{--@elseif(isset($nextlesson))
                 @lang('Bra, alla rätt på första försöket! Klicka på knappen nedan för att fortsätta till nästa lektion.')
                 <br><br>
                 <a href="/lessons/{{$nextlesson->id}}" class="btn btn-primary">@lang('Nästa lektion')</a>
+            --}}
             @else
-                @lang('Bra, alla rätt på första försöket! Du har nu gjort färdigt alla dina valda lektioner. Bra jobbat!')
+                @lang('Bra, alla rätt på första försöket!')<br><br>
+                <a href="/test/{{$test_session->id}}/pdfdiploma" class="btn btn-primary">@lang('Skriv ut diplom')</a>
+                <a href="/test/{{$test_session->id}}/resultmail" class="btn btn-primary">@lang('Skicka mail med intyg')</a>
             @endif
 
             <br><br>
-            <a href="/feedback">@lang('Vi vill gärna veta vad du tyckte om lektionen. Klicka här för att lämna din åsikt!')</a>
-            {{--<p>
+            {{--<a href="/feedback">@lang('Vi vill gärna veta vad du tyckte om lektionen. Klicka här för att lämna din åsikt!')</a>
+            <p>
                 @lang('Vad tyckte du om lektionen? Ge tumme upp eller ned. Ditt svar är helt anonymt och hjälper oss att utveckla bättre innehåll!')
             </p>
 
