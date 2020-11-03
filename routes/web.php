@@ -38,8 +38,9 @@ Route::post('/test/{lesson}/number_of_questions', 'TestController@set_number_of_
 Route::post('/test/storeResponse',              'TestController@store');
 
 //TestResultController
-Route::get('/test/{test_session}/pdfdiploma',   'TestResultController@pdfdiploma');
-Route::get('/test/{test_session}/resultmail',   'TestResultController@resultmail');
+Route::get('/test/result/{test_session}',       'TestResultController@show');
+Route::post('/test/{test_session}/pdfdiploma',  'TestResultController@pdfdiploma');
+Route::post('/test/{test_session}/resultmail',  'TestResultController@resultmail');
 
 //QuestionController
 Route::get('/test/question/create',             'QuestionController@create')->middleware('permission:manage lessons');
@@ -49,9 +50,6 @@ Route::get('/test/question/{question}/edit',    'QuestionController@edit')->midd
 Route::put('/test/question/{question}',         'QuestionController@update')->middleware('permission:manage lessons');
 Route::delete('/test/question/{question}',      'QuestionController@destroy')->middleware('permission:manage lessons');
 Route::post('/test/question/reorder',           'QuestionController@reorder')->middleware('permission:manage lessons');
-
-//TestResultController
-Route::get('/test/result/{test_session}',       'TestResultController@show');
 
 //FeedbackController
 Route::get('/feedback',                         'FeedbackController@create');

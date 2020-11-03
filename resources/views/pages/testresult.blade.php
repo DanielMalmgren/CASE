@@ -9,8 +9,6 @@
     <div class="card">
         <div class="card-body">
 
-            {{--{{$resulttext}}--}}
-
             @for ($i = 10; $i <= 100; $i=$i+10)
                 @if($percent>=$i)
                     <img class="resultstar" src="/images/Star_happy.png">
@@ -19,82 +17,48 @@
                 @endif
             @endfor
 
-            {{--<div>
-                @if($test_session->percent()>49)
-                    <img class="resultstar" src="/images/Star_happy.png">
-                @else
-                    <img class="resultstar" src="/images/Star_unhappy.png">
-                @endif
-                @if($test_session->percent()>74)
-                    <img class="resultstar" src="/images/Star_happy.png">
-                @else
-                    <img class="resultstar" src="/images/Star_unhappy.png">
-                @endif
-                @if($test_session->percent()==100)
-                    <img class="resultstar" src="/images/Star_happy.png">
-                @else
-                    <img class="resultstar" src="/images/Star_unhappy.png">
-                @endif
-            </div>--}}
-
             <br><br>
 
             @if($percent<100)
                 @lang('Inte riktigt alla rätt rakt igenom. Klicka på knappen nedan för att gå tilbaka till lektionen och repetera.')
                 <br><br>
                 <a href="/lessons/{{$lesson->id}}" class="btn btn-primary">@lang('Tillbaka till lektionen')</a>
-            {{--@elseif(isset($nextlesson))
-                @lang('Bra, alla rätt på första försöket! Klicka på knappen nedan för att fortsätta till nästa lektion.')
-                <br><br>
-                <a href="/lessons/{{$nextlesson->id}}" class="btn btn-primary">@lang('Nästa lektion')</a>
-            --}}
             @else
                 @lang('Bra, alla rätt på första försöket!')<br><br>
-                <a href="/test/{{$test_session->id}}/pdfdiploma" class="btn btn-primary">@lang('Skriv ut diplom')</a>
-                <a href="/test/{{$test_session->id}}/resultmail" class="btn btn-primary">@lang('Skicka mail med intyg')</a>
+
+                <form method="post" name="pdfdiploma" action="{{action('TestResultController@pdfdiploma', $test_session->id)}}" accept-charset="UTF-8">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="name">@lang('Ditt namn')</label>
+                        <input name="name" class="form-control" id="name" required>
+                    </div>
+
+                    <button class="btn btn-primary btn-lg btn-primary" type="submit">@lang('Skriv ut diplom')</button>
+
+                </form>
+
+                <br>
+
+                <form method="post" name="resultmail" id="resultmail" action="{{action('TestResultController@resultmail', $test_session->id)}}" accept-charset="UTF-8">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="name">@lang('Ditt namn')</label>
+                        <input name="name" class="form-control" id="name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email">@lang('Mailadress att skicka intyg till')</label>
+                        <input type="email" name="email" class="form-control" id="email" required>
+                    </div>
+
+                    <button class="btn btn-primary btn-lg btn-primary" type="submit">@lang('Skicka mail med intyg')</button>
+
+                </form>
+
             @endif
 
             <br><br>
-            {{--<a href="/feedback">@lang('Vi vill gärna veta vad du tyckte om lektionen. Klicka här för att lämna din åsikt!')</a>
-            <p>
-                @lang('Vad tyckte du om lektionen? Ge tumme upp eller ned. Ditt svar är helt anonymt och hjälper oss att utveckla bättre innehåll!')
-            </p>
-
-            <div>
-                <img id="upvote" class="votebutton" src="/images/upvote.png">
-                <img id="downvote" class="votebutton" src="/images/downvote.png">
-            </div>--}}
         </div>
     </div>
-
-    {{--<br>
-    @if($nextlesson)
-        <h1>@lang('Nästa lektion')</h1>
-        @include('inc.listlesson')
-        <br>
-    @endif--}}
-
-    {{--<script type="text/javascript">
-        function vote(vote) {
-            var lessonId = "{{$test_session->lesson->id}}";
-            var userId = "{{$test_session->user->id}}";
-            var token = "{{ csrf_token() }}";
-            $.ajax({
-                url: '/lessons/'+lessonId+'/vote',
-                data : {_token:token,vote:vote},
-                type: 'PUT'
-            });
-            alert("@lang('Tack för din feedback!')");
-        }
-
-        $(document).ready(function(){
-            $("#upvote").click(function(){
-                vote(1);
-            });
-            $("#downvote").click(function(){
-                vote(-1);
-            });
-        });
-    </script>--}}
 
 @endsection

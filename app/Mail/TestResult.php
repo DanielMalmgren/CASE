@@ -32,6 +32,6 @@ class TestResult extends Mailable
      */
     public function build()
     {
-        return $this->subject(_('Påminnelse om tidsattestering'))->view('emails.testresult');
+        return $this->subject(_('Testresultat för CASE-projektet'))->view('emails.testresult');
     }
 }
