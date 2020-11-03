@@ -40,6 +40,13 @@ class Track extends Model
         return \App::isLocale($this->default_locale->id);
     }
 
+    public function color()
+    {
+        return $this->belongsTo('App\Color')->withDefault([
+            'hex' => '#ffffff',
+        ]);
+    }
+
     public function first_lesson(): ?Lesson
     {
         return $this->lessons()->orderBy('order')->where('active', true)->first();

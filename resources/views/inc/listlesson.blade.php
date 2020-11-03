@@ -1,6 +1,11 @@
-<a href="/lessons/{{$lesson->id}}" class="list-group-item list-group-item-action {{$lesson->active?"":"list-group-item-secondary"}}" id="id-{{$lesson->id}}">
+<a href="/lessons/{{$lesson->id}}" class="list-group-item list-group-item-action {{$lesson->active?"":"list-group-item-secondary"}}" style="margin-top:7px;border-style:solid;border-width:3px;border-color:{{$lesson->color->hex}}" id="id-{{$lesson->id}}">
     <div class="row">
-        <div class="col-10">
+        <div class="col-1">
+            @if(isset($lesson->icon) && $lesson->icon != '')
+                <img class="lessonimage" src="/storage/icons/{{$lesson->icon}}" style="max-width:30px;margin-right:10px">
+            @endif
+        </div>
+        <div class="col-9">
             <h5 class="mb-0">
                 {{$lesson->translation()->name}}
                 @if($lesson->active == 0)
