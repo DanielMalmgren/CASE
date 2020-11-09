@@ -10,6 +10,6 @@
         @if($content->lesson->track->current_locale_is_track_default())
             <a href="#" class="close remove_field" data-dismiss="alert" data-translations="{{$content->translations()->count()}}" aria-label="close">&times;</a>
         @endif
-        <textarea rows="4" name="html[{{$content->id}}]" class="form-control twe original-content">{!!$content->translateOrDefault(App::getLocale())->text!!}</textarea>
+        <textarea rows="4" name="html[{{$content->id}}]" class="form-control twe original-content">{!!$content->text!!}</textarea>
     </div>
 </div>
