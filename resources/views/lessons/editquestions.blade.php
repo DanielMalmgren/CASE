@@ -49,7 +49,7 @@
     });
 </script>
 
-    <H1>@lang('Redigera frågor för lektion') {{$lesson->translateOrDefault(App::getLocale())->name}}</H1>
+    <H1>@lang('Redigera frågor för lektion') {{$lesson->translation()->name}}</H1>
 
     @if($questions->isEmpty())
         @lang('Denna lektion har inga frågor. Du kan kopiera samtliga frågor ifrån en annan lektion genom att välja nedan.')
@@ -61,7 +61,7 @@
                 <select class="custom-select d-block w-100" name="sourcelesson" id="sourcelesson" required="" onchange="this.form.submit()">
                     <option disabled selected>@lang('Välj lektion att kopiera ifrån')</option>
                     @foreach($lessonsWithQuestions as $sourcelesson)
-                        <option value="{{$sourcelesson->id}}">{{$sourcelesson->translateOrDefault(App::getLocale())->name}} ({{$sourcelesson->track->translateOrDefault(App::getLocale())->name}})</option>
+                        <option value="{{$sourcelesson->id}}">{{$sourcelesson->translation()->name}} ({{$sourcelesson->track->translateOrDefault(App::getLocale())->name}})</option>
                     @endforeach
                 </select>
             </div>
@@ -87,7 +87,7 @@
                             <a href="#" class="close remove_question" data-dismiss="alert" aria-label="close">&times;</a>
                         @endif
                         <a href="/test/question/{{$question->id}}/edit">
-                            <h6 class="mb-3">{{$question->translateOrDefault(App::getLocale())->text}}</h6>
+                            <h6 class="mb-3">{{$question->translation()->text}}</h6>
                         </a>
                     </div>
                 </div>

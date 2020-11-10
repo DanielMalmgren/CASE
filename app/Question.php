@@ -24,6 +24,16 @@ class Question extends Model
     {
         return $this->hasMany('App\ResponseOption');
     }
+
+    public function translation()
+    {
+        $translation = $this->translate(\App::getLocale());
+        if(isset($translation)) {
+            return $translation;
+        } else {
+            return $this->translate($this->lesson->track->default_locale->id);
+        }
+    }
 }
 
 class QuestionTranslation extends Model

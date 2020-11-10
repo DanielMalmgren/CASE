@@ -14,7 +14,7 @@
 
         <div class="mb-3">
             <label for="text">@lang('Fråga')</label>
-            <input name="text" class="form-control" id="text" value="{{$question->translateOrDefault(App::getLocale())->text}}">
+            <input name="text" class="form-control" id="text" value="{{$question->translation()->text}}">
         </div>
 
         <div class="mb-3">
