@@ -2,6 +2,10 @@
 * ====================== Various ===========================
 */
 
+html, body {
+    font-size: 18px !important;
+}
+
 div.tree-multiselect {
     border: 0px !important;
 }
