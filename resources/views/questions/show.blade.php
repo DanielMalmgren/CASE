@@ -39,7 +39,7 @@
 
         <div class="card">
             <div class="card-body">
-                {{$question->translateOrDefault(App::getLocale())->text}}
+                {{$question->translation()->text}}
             </div>
         </div>
 
