@@ -43,9 +43,17 @@ class StoreTestResponse extends FormRequest
      */
     public function messages()
     {
-        return [
-            'in' => __('Fel svar, försök igen!'),
-        ];
+        $reasoning = TestResponse::find($this->session()->get('test_response_id'))->question->translation()->reasoning;
+
+        if(isset($reasoning)) {
+            return [
+                'in' => $reasoning,
+            ];
+        } else {
+            return [
+                'in' => __('Fel svar, försök igen!'),
+            ];
+        }
     }
 
     /**
