@@ -106,6 +106,8 @@
         --}}
     @endif
 
+    <a href="/tracks/{{$lesson->track->id}}" class="btn btn-primary">@lang('Tillbaka till spåret')</a>
+
     @can('manage lessons')
         <br><br>
         <a href="/lessons/{{$lesson->id}}/edit" class="btn btn-primary">@lang('Redigera lektionen')</a>
