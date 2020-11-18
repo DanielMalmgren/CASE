@@ -17,6 +17,10 @@ class HomeController extends Controller
 
         logger("Locale: ".$browserlocale);
 
+        logger("GeoIP information:");
+        $geoip = geoip()->getLocation($request->ip);
+        logger(print_r($geoip, true));
+
         setlocale(LC_TIME, $browserlocale);
 
         $data = [

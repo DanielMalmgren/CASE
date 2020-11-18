@@ -164,6 +164,8 @@ return [
         Astrotomic\Translatable\TranslatableServiceProvider::class,
 
         Barryvdh\DomPDF\ServiceProvider::class,
+
+        \Torann\GeoIP\GeoIPServiceProvider::class,
     ],
 
     /*
@@ -213,6 +215,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
     ],
 
 ];
