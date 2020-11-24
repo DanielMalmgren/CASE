@@ -8,6 +8,14 @@
 
 <script src="https://player.vimeo.com/api/player.js"></script>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.flip-card').click(function(){
+            $(this).toggleClass('flipped')
+        });
+    });
+</script>
+
     <H1>{{$lesson->translation()->name}}</H1>
 
     <div class="card">
@@ -70,9 +78,41 @@
                         </div>
                         <br>
                         @break
+                        
+                    @case('flipcard')
+                        <div class="card mb-3 {{$content->adjustment}}" style="border:0;width:{{$content->max_width}}px;height:{{$content->max_height}}px;max-width:100%">
+                            <div class="flip-card mb-3">
+                                <div class="flip-card-inner" style="background-color:{{$content->color->hex}}">
+                                    <div class="flip-card-front">
+                                        <div class="flip-card-content">
+                                            {!!$content->textPart(0)!!}
+                                        </div>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <div class="flip-card-content">
+                                            {!!$content->textPart(1)!!}
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>  
+                        </div>
+
+                        @break
 
                     @case('file')
                         <a target="_blank" href="{{$content->url()}}">{{$content->filename()}}</a>
+                        <br>
+                        @break
+
+                    @case('toc')
+                        @if($pages > 1)
+                            @for ($p = 1; $p <= $pages; $p++)
+                                <a href="/lessons/{{$lesson->id}}/{{$p}}" style="min-width:300px;{{$lesson->page_color_style($p)}}" class="btn btn-primary {{$page==$p?'disabled':''}}">{{$lesson->page_heading($p)}}</a>
+                                <br><br>
+                            @endfor
+                        @else
+                            Please add more pages in order to make a table of contents!
+                        @endif
                         <br>
                         @break
 
@@ -93,7 +133,7 @@
     @if($pages > 1)
         <a href="/lessons/{{$lesson->id}}/{{$page-1}}" class="btn btn-primary {{$page==1?'disabled':''}}"><i class="fas fa-chevron-left"></i></a>
         @for ($p = 1; $p <= $pages; $p++)
-            <a href="/lessons/{{$lesson->id}}/{{$p}}" class="btn btn-primary {{$page==$p?'disabled':''}}">{{$lesson->page_heading($p)}}</a>
+            <a href="/lessons/{{$lesson->id}}/{{$p}}" style="{{$lesson->page_color_style($p)}}" class="btn btn-primary {{$page==$p?'disabled':''}}">{{$lesson->page_heading($p)}}</a>
         @endfor
         <a href="/lessons/{{$lesson->id}}/{{$page+1}}" class="btn btn-primary {{$page==$pages?'disabled':''}}"><i class="fas fa-chevron-right"></i></a>
         <br><br>

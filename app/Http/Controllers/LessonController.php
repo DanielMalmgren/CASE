@@ -212,7 +212,7 @@ class LessonController extends Controller
         if($request->html) {
             foreach($request->html as $html_id => $html_text) {
                 $content = Content::find($html_id);
-                $newtext = $content->add_target_to_links($html_text);
+                $newtext = Content::add_target_to_links($html_text);
                 if($content->translateOrNew($currentLocale)->text != $newtext) {
                     $content->translateOrNew($currentLocale)->text = $newtext;
                     $content->save();
@@ -224,9 +224,42 @@ class LessonController extends Controller
         //Loop through all added html contents
         if($request->new_html) {
             foreach($request->new_html as $temp_key => $new_html) {
-                $content = new Content('html', $lesson->id, null, $new_html);
+                $newtext = Content::add_target_to_links($new_html);
+                $content = new Content('html', $lesson->id, null, $newtext);
                 $content_order = str_replace("[".$temp_key."]", "[".$content->id."]", $content_order);
                 logger("HTML content ".$content->id." is being added");
+            }
+        }
+
+        //Loop through all changed flipcard contents
+        if($request->flipcard_front) {
+            foreach($request->flipcard_front as $id => $front_text) {
+                $back_text = $request->flipcard_back[$id];
+                $content = Content::find($id);
+                $newfront = str_replace(';', '', $front_text);
+                $newback = str_replace(';', '', $back_text);
+                if($content->translateOrNew($currentLocale)->text != $newfront.';'.$newback) {
+                    $content->translateOrNew($currentLocale)->text = $newfront.';'.$newback;
+                    logger("Flipcard content ".$id." is being changed");
+                }
+                $color = Color::where('hex', $request->content_colors[$id])->first();
+                $content->color_id = $color->id;
+                $content->save();
+            }
+        }
+
+        //Loop through all added flipcard contents
+        if($request->new_flipcard_front) {
+            foreach($request->new_flipcard_front as $temp_key => $front_text) {
+                $back_text = $request->new_flipcard_back[$temp_key];
+                $newfront = str_replace(';', '', Content::add_target_to_links($front_text));
+                $newback = str_replace(';', '', Content::add_target_to_links($back_text));
+                $content = new Content('flipcard', $lesson->id, null, $newfront.';'.$newback);
+                $color = Color::where('hex', $request->content_colors[$temp_key])->first();
+                $content->color_id = $color->id;
+                $content->save();
+                $content_order = str_replace("[".$temp_key."]", "[".$content->id."]", $content_order);
+                logger("Flipcard content ".$content->id." is being added");
             }
         }
 
@@ -329,10 +362,12 @@ class LessonController extends Controller
             foreach($request->pagebreak as $pagebreak_id => $pagebreak_text) {
                 $content = Content::find($pagebreak_id);
                 if($content->translateOrNew($currentLocale)->text != $pagebreak_text) {
-                    $content->translateOrNew($currentLocale)->text = $pagebreak_text;
-                    $content->save();
                     logger("Page break ".$pagebreak_id." is being changed");
                 }
+                $content->translateOrNew($currentLocale)->text = $pagebreak_text;
+                $color = Color::where('hex', $request->content_colors[$pagebreak_id])->first();
+                $content->color_id = $color->id;
+                $content->save();
             }
         }
 
@@ -340,8 +375,21 @@ class LessonController extends Controller
         if($request->new_pagebreak) {
             foreach($request->new_pagebreak as $temp_key => $new_pagebreak) {
                 $content = new Content('pagebreak', $lesson->id, null, $new_pagebreak);
+                $color = Color::where('hex', $request->content_colors[$temp_key])->first();
+                $content->color_id = $color->id;
+                $content->save();
                 $content_order = str_replace("[".$temp_key."]", "[".$content->id."]", $content_order);
                 logger("Page break ".$content->id." is being added");
+            }
+        }
+
+        //Loop through all added TOCs (table of contents)
+        if($request->new_toc) {
+            foreach($request->new_toc as $temp_key => $new_toc) {
+                $content = new Content('toc', $lesson->id);
+                $content->save();
+                $content_order = str_replace("[".$temp_key."]", "[".$content->id."]", $content_order);
+                logger("Table of contents ".$content->id." is being added");
             }
         }
 

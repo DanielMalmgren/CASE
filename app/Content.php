@@ -40,6 +40,13 @@ class Content extends Model
         return $this->belongsTo('App\Lesson');
     }
 
+    public function color()
+    {
+        return $this->belongsTo('App\Color')->withDefault([
+            'hex' => '#ffffff',
+        ]);
+    }
+
     public function content_settings()
     {
         return $this->hasMany('App\ContentSetting');
@@ -55,6 +62,17 @@ class Content extends Model
         }
     }
 
+    public function getMaxHeightAttribute()
+    {
+        $valueobj = $this->content_settings->where('key', 'max_height')->first();
+        if(isset($valueobj)) {
+            return $valueobj->value;
+        } else {
+            return '250';
+        }
+    }
+
+
     public function getAdjustmentAttribute()
     {
         $valueobj = $this->content_settings->where('key', 'adjustment')->first();
@@ -62,6 +80,15 @@ class Content extends Model
             return $valueobj->value;
         } else {
             return 'left';
+        }
+    }
+
+    public function textPart($part) {
+        $translation = $this->translation();
+        if(isset($translation)) {
+            return explode(';', $translation->text)[$part];
+        } else {
+            return '';
         }
     }
 

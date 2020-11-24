@@ -19,8 +19,6 @@ function getfreeid() {
 
 $(function() {
 
-    console.log("Whatever");
-
     var wrapper = $("#contents_wrap");
     var add_button = $("#add_content_button");
     var new_id = 0;
@@ -133,11 +131,100 @@ $(function() {
                 </div>
                 `);
                 break;
+            case 'flipcard':
+                $(wrapper).append(`
+                    <div id="new_flipcard[`+new_id+`]" data-id="`+new_id+`" class="card">
+                        <div class="card-body">
+                            <span class="handle"><i class="fas fa-arrows-alt-v"></i></span>
+                            <label class="handle">@lang('Vändkort')</label>
+                            <a href="#" class="close remove_field" data-dismiss="alert" aria-label="close">&times;</a>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <label for="content_colors[`+new_id+`]">@lang('Färg')</label>
+                                        <input name="content_colors[`+new_id+`]" style="height:35px" type="color" class="form-control" list="presetColors" value="#ffffff">
+                                        <datalist id="presetColors">
+                                            @foreach($colors as $color)
+                                                <option>{{$color->hex}}</option>
+                                            @endforeach
+                                        </datalist>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label for="settings[`+new_id+`][max_width]">@lang('Bredd')</label>
+                                        <input name="settings[`+new_id+`][max_width]" class="form-control">
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label for="settings[`+new_id+`][max_height]">@lang('Höjd')</label>
+                                        <input name="settings[`+new_id+`][max_height]" class="form-control">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="settings[`+new_id+`][adjustment]">@lang('Justering')</label>
+                                        <select class="custom-select d-block w-100" name="settings[`+new_id+`][adjustment]">
+                                            <option value="float-left">@lang('Vänster')</option>
+                                            <option value="mx-auto">@lang('Centrerad')</option>
+                                            <option value="float-right">@lang('Höger')</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <label class="handle" for="new_flipcard_front[`+new_id+`]">
+                                @lang('Text framsida')
+                            </label>
+                            <a href="#" class="close remove_field" data-dismiss="alert" aria-label="close">&times;</a>
+                            <textarea rows="4" name="new_flipcard_front[`+new_id+`]" class="form-control twe original-content"></textarea>
+                            <label class="handle" for="new_flipcard_back[`+new_id+`]">
+                                @lang('Text baksida')
+                            </label>
+                            <textarea rows="4" name="new_flipcard_back[`+new_id+`]" class="form-control twe original-content"></textarea>
+                        </div>
+                    </div>
+                `);
+                addtwe();
+                break;
             case 'file':
                 $(wrapper).append('<div id="new_file['+new_id+']" data-id="'+new_id+'" class="card"><div class="card-body"><span class="handle"><i class="fas fa-arrows-alt-v"></i></span><label class="handle" for="new_file['+new_id+']">@lang('Övrig fil')</label><a href="#" class="close remove_field" data-dismiss="alert" aria-label="close">&times;</a><input name="new_file['+new_id+']" class="form-control original-content" type="file"></div></div>');
                 break;
             case 'pagebreak':
-                $(wrapper).append('<div id="new_pagebreak['+new_id+']" data-id="'+new_id+'" class="card"><div class="card-body"><span class="handle"><i class="fas fa-arrows-alt-v"></i></span><label class="handle" for="new_pagebreak['+new_id+']">@lang('Sidrubrik')</label><a href="#" class="close remove_field" data-dismiss="alert" aria-label="close">&times;</a><input name="new_pagebreak['+new_id+']" class="form-control original-content"></div></div>');
+                $(wrapper).append(`
+                <div id="new_pagebreak[`+new_id+`]" data-id="`+new_id+`" class="card">
+                    <div class="card-body">
+                        <span class="handle"><i class="fas fa-arrows-alt-v"></i></span>
+                        <label class="handle" for="new_pagebreak[`+new_id+`]">@lang('Sidrubrik')</label>
+                        <a href="#" class="close remove_field" data-dismiss="alert" aria-label="close">&times;</a>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <input name="new_pagebreak[`+new_id+`]" class="form-control original-content">
+                                </div>
+                                <div class="col-lg-2">
+                                    <label for="content_colors[`+new_id+`]">@lang('Färg')</label>
+                                    <input name="content_colors[`+new_id+`]" type="color" list="presetColors">
+                                    <datalist id="presetColors">
+                                        @foreach($colors as $color)
+                                            <option>{{$color->hex}}</option>
+                                        @endforeach
+                                    </datalist>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `);
+                break;
+            case 'toc':
+                $(wrapper).append(`
+                <div id="new_toc[`+new_id+`]" data-id="`+new_id+`" class="card">
+                    <div class="card-body">
+                        <span class="handle"><i class="fas fa-arrows-alt-v"></i></span>
+                        <label class="handle" for="new_toc[`+new_id+`]">@lang('Innehållsförteckning')</label>
+                        <a href="#" class="close remove_field" data-dismiss="alert" aria-label="close">&times;</a>
+                        <input hidden name="new_toc[`+new_id+`]" class="form-control original-content">
+                    </div>
+                </div>
+                `);
                 break;
         }
         document.lesson.submit.disabled = false;

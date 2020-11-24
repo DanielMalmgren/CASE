@@ -79,6 +79,17 @@ class Lesson extends Model
         }
     }
 
+    public function page_color_style(int $page)
+    {
+        $hex = $this->contents->where('type', 'pagebreak')->sortBy('order')->skip($page-1)->first()->color->hex;
+        
+        if($hex == "#ffffff") { //White means default color should be used
+            return "";
+        } else {
+            return "background-color:".$hex.";border-color:".$hex;
+        }
+    }
+    
     //Return the order of the first content on the page
     function getFirstContentOnPage(int $page)
     {
