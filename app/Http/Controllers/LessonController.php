@@ -242,8 +242,7 @@ class LessonController extends Controller
                     $content->translateOrNew($currentLocale)->text = $newfront.';'.$newback;
                     logger("Flipcard content ".$id." is being changed");
                 }
-                $color = Color::where('hex', $request->content_colors[$id])->first();
-                $content->color_id = $color->id;
+                $content->setColor($request->content_colors[$id]);
                 $content->save();
             }
         }
@@ -255,8 +254,7 @@ class LessonController extends Controller
                 $newfront = str_replace(';', '', Content::add_target_to_links($front_text));
                 $newback = str_replace(';', '', Content::add_target_to_links($back_text));
                 $content = new Content('flipcard', $lesson->id, null, $newfront.';'.$newback);
-                $color = Color::where('hex', $request->content_colors[$temp_key])->first();
-                $content->color_id = $color->id;
+                $content->setColor($request->content_colors[$temp_key]);
                 $content->save();
                 $content_order = str_replace("[".$temp_key."]", "[".$content->id."]", $content_order);
                 logger("Flipcard content ".$content->id." is being added");
@@ -365,8 +363,7 @@ class LessonController extends Controller
                     logger("Page break ".$pagebreak_id." is being changed");
                 }
                 $content->translateOrNew($currentLocale)->text = $pagebreak_text;
-                $color = Color::where('hex', $request->content_colors[$pagebreak_id])->first();
-                $content->color_id = $color->id;
+                $content->setColor($request->content_colors[$pagebreak_id]);
                 $content->save();
             }
         }
@@ -375,8 +372,7 @@ class LessonController extends Controller
         if($request->new_pagebreak) {
             foreach($request->new_pagebreak as $temp_key => $new_pagebreak) {
                 $content = new Content('pagebreak', $lesson->id, null, $new_pagebreak);
-                $color = Color::where('hex', $request->content_colors[$temp_key])->first();
-                $content->color_id = $color->id;
+                $content->setColor($request->content_colors[$temp_key]);
                 $content->save();
                 $content_order = str_replace("[".$temp_key."]", "[".$content->id."]", $content_order);
                 logger("Page break ".$content->id." is being added");
