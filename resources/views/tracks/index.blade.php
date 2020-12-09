@@ -17,7 +17,7 @@
                             @endif
                             {{$track->translation()->name}}
                             @if($track->active == 0)
-                                - inaktiv
+                                - @lang('inaktiv')
                             @endif
                         </h6>
                         <small class="text-muted">{{$track->translation()->subtitle}}</small>
