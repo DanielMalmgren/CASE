@@ -9,7 +9,7 @@
             <h5 class="mb-0">
                 {{$lesson->translation()->name}}
                 @if($lesson->active == 0)
-                    - inaktiv
+                    - @lang('inaktiv')
                 @endif
             </h5>
         </div>

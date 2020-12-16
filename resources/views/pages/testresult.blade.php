@@ -51,6 +51,7 @@
                         <input type="email" name="email" class="form-control" id="email" required>
                     </div>
 
+                    <x-honey recaptcha/>
                     <button class="btn btn-primary btn-lg btn-primary" type="submit">@lang('Skicka mail med intyg')</button>
 
                 </form>

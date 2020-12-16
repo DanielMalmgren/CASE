@@ -17,6 +17,7 @@
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
+        "lukeraymonddowning/honey": "^0.3.1",
         "phpoffice/phpspreadsheet": "^1.9",
         "sentry/sentry-laravel": "2.2.0",
         "spatie/laravel-permission": "^3.0",

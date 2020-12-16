@@ -40,7 +40,7 @@ Route::post('/test/storeResponse',              'TestController@store');
 //TestResultController
 Route::get('/test/result/{test_session}',       'TestResultController@show');
 Route::post('/test/{test_session}/pdfdiploma',  'TestResultController@pdfdiploma');
-Route::post('/test/{test_session}/resultmail',  'TestResultController@resultmail');
+Route::post('/test/{test_session}/resultmail',  'TestResultController@resultmail')->middleware(['honey', 'honey-recaptcha']);
 
 //QuestionController
 Route::get('/test/question/create',             'QuestionController@create')->middleware('permission:manage lessons');

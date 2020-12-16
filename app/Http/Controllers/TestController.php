@@ -13,11 +13,13 @@ use App\Http\Requests\StoreTestResponse;
 
 class TestController extends Controller
 {
-    public function show(Lesson $lesson) {
+    public function show(Lesson $lesson, Request $request) {
         $test_session = new TestSession();
         $test_session->lesson_id = $lesson->id;
         //$test_session->user_id = Auth::user()->id;
         $test_session->save();
+
+        $request->session()->put('test_session_id', $test_session->id); //Used in TestResultController for verification that this is the correct session
 
         $lesson->times_test_started++;
         $lesson->save();

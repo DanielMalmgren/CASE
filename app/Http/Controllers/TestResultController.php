@@ -9,7 +9,7 @@ use PDF;
 
 class TestResultController extends Controller
 {
-    public function show(TestSession $test_session) {
+    public function show(TestSession $test_session, Request $request) {
 
         /*if($test_session->percent() === 100) {
             $resulttext = __('Grattis, du hade rätt på :percent% av frågorna på första försöket!', ['percent' => $test_session->percent()]);
@@ -18,6 +18,10 @@ class TestResultController extends Controller
         } else {
             $resulttext = __('Du hade bara rätt på :percent% av frågorna på första försöket!', ['percent' => $test_session->percent()]);
         }*/
+
+        if($request->session()->get('test_session_id') != $test_session->id) {
+            abort(403);
+        }
 
         $data = [
             'test_session' => $test_session,
