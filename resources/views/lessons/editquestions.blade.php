@@ -61,7 +61,7 @@
                 <select class="custom-select d-block w-100" name="sourcelesson" id="sourcelesson" required="" onchange="this.form.submit()">
                     <option disabled selected>@lang('Välj lektion att kopiera ifrån')</option>
                     @foreach($lessonsWithQuestions as $sourcelesson)
-                        <option value="{{$sourcelesson->id}}">{{$sourcelesson->translation()->name}} ({{$sourcelesson->track->translateOrDefault(App::getLocale())->name}})</option>
+                        <option value="{{$sourcelesson->id}}">{{$sourcelesson->translation()->name}} ({{$sourcelesson->track->translation()->name}})</option>
                     @endforeach
                 </select>
             </div>
