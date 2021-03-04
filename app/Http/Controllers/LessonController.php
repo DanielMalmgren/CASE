@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Lesson;
 use App\Track;
 use App\Question;
-use App\Title;
+use App\Country;
 use App\LessonResult;
 use App\Content;
 use App\ContentSetting;
@@ -64,10 +64,9 @@ class LessonController extends Controller
     }
 
     public function create(Track $track): View {
-        $titles = Title::all();
         $data = [
             'track' => $track,
-            'titles' => $titles,
+            'countries' => Country::all(),
             'colors' => Color::all(),
         ];
         return view('lessons.create')->with($data);
@@ -112,10 +111,9 @@ class LessonController extends Controller
     }
 
     public function edit(Lesson $lesson): View {
-        $titles = Title::all();
         $data = [
             'lesson' => $lesson,
-            'titles' => $titles,
+            'countries' => Country::all(),
             'tracks' => Track::all(),
             'colors' => Color::all(),
         ];
@@ -443,10 +441,10 @@ class LessonController extends Controller
         $lesson->translateOrNew($currentLocale)->name = $request->name;
         $lesson->active = $request->active;
         $lesson->track_id = $request->track;
-        $lesson->limited_by_title = $request->limited_by_title;
+        $lesson->limited_by_country = $request->limited_by_country;
         $lesson->save();
 
-        $lesson->titles()->sync($request->titles);
+        $lesson->countries()->sync($request->countries);
 
         return redirect('/lessons/'.$lesson->id)->with('success', __('Ändringar sparade'));
     }

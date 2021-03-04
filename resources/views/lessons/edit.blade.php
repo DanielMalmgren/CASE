@@ -56,9 +56,9 @@
 
     $(function() {
 
-        $('#limited_by_title').on('change', function() {
+        $('#limited_by_country').on('change', function() {
             var val = this.checked;
-            $("#titles").toggle(this.checked);
+            $("#countries").toggle(this.checked);
         });
 
         addtwe();
@@ -121,6 +121,17 @@
         <div class="mb-3">
             <input type="hidden" name="active" value="0">
             <label><input type="checkbox" name="active" value="1" {{$lesson->active?"checked":""}}>@lang('Aktiv')</label>
+        </div>
+
+        <div class="mb-3">
+            <input type="hidden" name="limited_by_country" value="0">
+            <label><input type="checkbox" name="limited_by_country" id="limited_by_country" value="1" {{$lesson->limited_by_country?"checked":""}}>@lang('Begränsad enbart till vissa länder')</label>
+        </div>
+
+        <div id="countries" class="ml-5" style="{{!$lesson->limited_by_country?"display: none;":""}}">
+            @foreach($countries as $country)
+                <label><input type="checkbox" {{$lesson->countries->contains('id', $country->id)?"checked":""}} name="countries[]" value="{{$country->id}}">{{$country->name}}</label><br>
+            @endforeach
         </div>
 
         <h2>@lang('Innehåll')</h2>

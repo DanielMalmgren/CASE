@@ -37,9 +37,9 @@ class Lesson extends Model
         return $this->hasMany('App\Content');
     }
 
-    public function titles()
+    public function countries()
     {
-        return $this->belongsToMany('App\Title');
+        return $this->belongsToMany('App\Country');
     }
 
     public function color()

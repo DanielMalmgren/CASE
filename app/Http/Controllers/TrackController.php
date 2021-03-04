@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Track;
 use App\Locale;
 use App\Color;
+use App\Country;
 use PDF;
 
 class TrackController extends Controller
@@ -20,8 +21,28 @@ class TrackController extends Controller
         return view('tracks.index')->with($data);
     }
 
-    public function show(Track $track) {
-        $lessons = $track->lessons->sortBy('order');
+    public function show(Request $request, Track $track) {
+        if(Auth::user() !== null && Auth::user()->can('manage lessons')) {
+            $lessons = $track->lessons->sortBy('order');
+        } else {
+            $geoip = geoip()->getLocation($request->ip);
+            $country = Country::where('name', $geoip->country)->first();
+            if($country !== null) {
+                $country_id = $country->id;
+            } else {
+                $country_id = -1; //Country didn't match any country in our list
+            }
+
+            $lessons = $track->lessons()->where('active', true)
+                ->where(static function ($query) use ($country_id) {
+                    $query->whereHas('countries', static function ($query) use ($country_id) {
+                        $query->where('id', $country_id);
+                    })
+                ->orWhere('limited_by_country', false);
+                })
+                ->orderBy('order')->get();
+        }
+
         $data = [
             'track' => $track,
             'lessons' => $lessons,

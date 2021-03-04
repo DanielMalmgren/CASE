@@ -34,9 +34,9 @@
     }
 
     $(function() {
-        $('#limited_by_title').on('change', function() {
+        $('#limited_by_country').on('change', function() {
             var val = this.checked;
-            $("#titles").toggle(this.checked);
+            $("#countries").toggle(this.checked);
         });
 
         $("#contents_wrap").sortable({
@@ -82,16 +82,16 @@
             <label><input type="checkbox" name="active" value="1" {{old('active')?"checked":""}}>@lang('Aktiv')</label>
         </div>
 
-        {{--<div class="mb-3">
-            <input type="hidden" name="limited_by_title" value="0">
-            <label><input type="checkbox" name="limited_by_title" id="limited_by_title" value="1">@lang('Begränsad enbart till vissa befattningar')</label>
+        <div class="mb-3">
+            <input type="hidden" name="limited_by_country" value="0">
+            <label><input type="checkbox" name="limited_by_country" id="limited_by_country" value="1">@lang('Begränsad enbart till vissa länder')</label>
         </div>
 
-        <div id="titles" style="display: none;">
-            @foreach($titles as $title)
-                <label><input type="checkbox" name="titles[]" value="{{$title->id}}">{{$title->workplace_type->name}} - {{$title->name}}</label><br>
+        <div id="countries" class="ml-5" style="display: none;">
+            @foreach($countries as $country)
+                <label><input type="checkbox" name="countries[]" value="{{$country->id}}">{{$country->name}}</label><br>
             @endforeach
-        </div>--}}
+        </div>
 
         <h2>@lang('Innehåll')</h2>
         <div id="contents_wrap"></div>
