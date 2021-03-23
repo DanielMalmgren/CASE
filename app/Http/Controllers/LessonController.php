@@ -11,6 +11,7 @@ use App\LessonResult;
 use App\Content;
 use App\ContentSetting;
 use App\Color;
+use App\Poll;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -68,7 +69,8 @@ class LessonController extends Controller
             'track' => $track,
             'countries' => Country::all(),
             'colors' => Color::all(),
-        ];
+            'polls' => Poll::all(),
+         ];
         return view('lessons.create')->with($data);
     }
 
@@ -116,7 +118,8 @@ class LessonController extends Controller
             'countries' => Country::all(),
             'tracks' => Track::all(),
             'colors' => Color::all(),
-        ];
+            'polls' => Poll::all(),
+         ];
         return view('lessons.edit')->with($data);
     }
 
@@ -436,6 +439,12 @@ class LessonController extends Controller
 
         if(isset($request->icon)) {
             $lesson->icon = basename($request->icon->store('public/icons'));
+        }
+
+        if($request->poll < 0) {
+            $lesson->poll_id = null;
+        } else {
+            $lesson->poll_id = $request->poll;
         }
 
         $lesson->translateOrNew($currentLocale)->name = $request->name;

@@ -43,14 +43,9 @@
                                 @can('manage users')
                                     <li aria-haspopup="false"><a href="/users">@lang('Användare')</a></li>
                                 @endcan
-                                {{--
-                                @canany(['add workplaces','edit workplaces'])
-                                    <li aria-haspopup="false"><a href="/workplace">@lang('Arbetsplatsinställningar')</a></li>
-                                @endcanany
                                 @hasrole('Admin')
                                     <li aria-haspopup="false"><a href="/poll">@lang('Hantera enkäter')</a></li>
                                 @endhasrole
-                                --}}
                             @endcan
                             {{--<li aria-haspopup="false"><a href="/statistics">@lang('Statistik')</a></li>--}}
                         </ul>

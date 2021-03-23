@@ -22,6 +22,16 @@ class PollQuestion extends Model
         return $this->hasMany('App\PollResponse');
     }
 
+    public function translation()
+    {
+        $translation = $this->translate(\App::getLocale());
+        if(isset($translation)) {
+            return $translation;
+        } else {
+            return $this->translate($this->poll->default_locale->id);
+        }
+    }
+
     public function next_question()
     {
         return $this->poll->next_question($this);

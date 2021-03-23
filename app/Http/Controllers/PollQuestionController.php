@@ -82,11 +82,11 @@ class PollQuestionController extends Controller
         usleep(50000);
         $this->validate($request, [
             'text' => 'required',
-            'type' => 'required',
+            //'type' => 'required',
         ],
         [
             'text.required' => __('Du måste ange själva frågetexten!'),
-            'type.required' => __('Du måste ange vad det är för typ av fråga!'),
+            //'type.required' => __('Du måste ange vad det är för typ av fråga!'),
         ]);
 
         $currentLocale = \App::getLocale();
@@ -100,11 +100,11 @@ class PollQuestionController extends Controller
         $question->min_alternatives = $request->min_alternatives;
         $question->max_alternatives = $request->max_alternatives;
         $question->compulsory = $request->compulsory;
-        if($request->display_criteria[0] == -1) {
+        /*if($request->display_criteria[0] == -1) {
             $question->display_criteria = '';
         } else {
             $question->display_criteria = implode('==', $request->display_criteria);
-        }
+        }*/
         $question->save();
 
         return redirect('/poll/'.$question->poll->id.'/edit')->with('success', __('Ändringar sparade'));

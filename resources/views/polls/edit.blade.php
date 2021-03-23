@@ -14,50 +14,34 @@
 
         <div class="mb-3">
             <label for="name">@lang('Namn')</label>
-            <input name="name" class="form-control" id="name" value="{{$poll->translateOrDefault(App::getLocale())->name}}">
+            <input name="name" class="form-control" id="name" value="{{$poll->translation()->name}}">
         </div>
 
         <div class="mb-3">
             <label for="infotext">@lang('Informationstext före')</label>
-            <textarea rows="4" name="infotext" class="form-control twe">{!!$poll->translateOrDefault(App::getLocale())->infotext!!}</textarea>
+            <textarea rows="4" name="infotext" class="form-control twe">{!!$poll->translation()->infotext!!}</textarea>
         </div>
 
         <div class="mb-3">
             <label for="infotext2">@lang('Informationstext efter')</label>
-            <textarea rows="4" name="infotext2" class="form-control twe">{!!$poll->translateOrDefault(App::getLocale())->infotext2!!}</textarea>
-        </div>
-
-        @lang('Målgrupp:') <br>
-        <select id="workplaces" name="workplaces[]" multiple="multiple">
-        @foreach($workplaces as $workplace)
-            <option value="{{$workplace->id}}" data-section="{{$workplace->municipality->name}}" {{$poll->workplaces->contains('id', $workplace->id)?"selected":""}}>{{$workplace->name}}</option>
-        @endforeach
-        </select>
-
-        <div class="mb-3">
-            <select class="custom-select d-block w-100" name="scope_terms_of_employment" required="">
-                <option value="0">@lang('Samtliga')</option>
-                <option value="1" {{$poll->scope_terms_of_employment==1?"selected":""}}>@lang('Tillsvidareanställning')</option>
-                <option value="2" {{$poll->scope_terms_of_employment==2?"selected":""}}>@lang('Tidsbegränsad anställning')</option>
-                <option value="3" {{$poll->scope_terms_of_employment==3?"selected":""}}>@lang('Vet ej')</option>
-            </select>
+            <textarea rows="4" name="infotext2" class="form-control twe">{!!$poll->translation()->infotext2!!}</textarea>
         </div>
 
         <div class="mb-3">
-            <select class="custom-select d-block w-100" name="scope_full_or_part_time" required="">
-                <option value="0">@lang('Samtliga')</option>
-                <option value="1" {{$poll->scope_full_or_part_time==1?"selected":""}}>@lang('Deltid')</option>
-                <option value="2" {{$poll->scope_full_or_part_time==2?"selected":""}}>@lang('Heltid')</option>
-                <option value="3" {{$poll->scope_full_or_part_time==3?"selected":""}}>@lang('Vet ej')</option>
+            <label for="locale">@lang('Standardspråk')</label>
+            <select class="custom-select d-block w-100" disabled>
+                <option selected>{{$poll->default_locale->name}}</option>
             </select>
         </div>
 
-        <br><br>
+        {{--<br><br>
 
         @lang('mellan')
         <input type="date" name="active_from" class="form-control" value="{{$poll->active_from}}">
         @lang('och')
         <input type="date" name="active_to" class="form-control" value="{{$poll->active_to}}">
+
+        --}}
 
         <br>
 
@@ -76,7 +60,7 @@
                     @if($question->type == 'pagebreak')
                         <hr style="width:95%">
                     @else
-                        {{$question->translateOrDefault(App::getLocale())->text}} -
+                        {{$question->translation()->text}} -
                         {{$question->compulsory?__("Obligatorisk"):__("Frivillig")}}
                         @if($question->type == 'freetext')
                             @lang('fritextfråga')
@@ -92,7 +76,9 @@
         @endforeach
     </div>
 
-    <a href="/pollquestion/create/{{$poll->id}}" class="btn btn-primary">@lang('Lägg till fråga')</a>
+    @if($poll->current_locale_is_poll_default())
+        <a href="/pollquestion/create/{{$poll->id}}" class="btn btn-primary">@lang('Lägg till fråga')</a>
+    @endif
 
     <br><br>
 

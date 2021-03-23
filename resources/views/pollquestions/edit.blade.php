@@ -49,7 +49,7 @@
 
         <div class="mb-3">
             <label for="text">@lang('Fråga')</label>
-            <input name="text" class="form-control" id="text" value="{{$question->translateOrDefault(App::getLocale())->text}}">
+            <input name="text" class="form-control" id="text" value="{{$question->translation()->text}}">
         </div>
 
         <div class="mb-3">
@@ -90,17 +90,22 @@
                     <div class="col flex-nowrap">
                         <input name="alternative[{{$loop->index}}]" class="form-control" value="{{$alternative}}">
                     </div>
-                    <div class="col col-auto flex-nowrap">
-                        <i class="fas fa-trash remove_alternative"></i>
-                    </div>
+                    @if($question->poll->current_locale_is_poll_default())
+                        <div class="col col-auto flex-nowrap">
+                            <i class="fas fa-trash remove_alternative"></i>
+                        </div>
+                    @endif
                 </div>
             @endforeach
             <div id="new_alternatives_wrapper"></div>
-            <div id="add_alternative_button" class="btn btn-primary" style="margin-bottom:15px" type="text">@lang('Lägg till val')</div>
+            @if($question->poll->current_locale_is_poll_default())
+                <div id="add_alternative_button" class="btn btn-primary" style="margin-bottom:15px" type="text">@lang('Lägg till val')</div>
+            @endif
         </div>
 
         <br>
 
+        {{--
         <div class="row mb-2 no-gutters">
             <div class="col col-auto flex-nowrap pr-1 my-auto">
                 <label class="mb-0" for="type">@lang('Visningskriterium: ')</label>
@@ -120,6 +125,7 @@
                 <input name="display_criteria[1]" class="form-control" value="{{isset($display_criteria_array[1])?$display_criteria_array[1]:""}}">
             </div>
         </div>
+        --}}
 
         <br>
 

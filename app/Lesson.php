@@ -49,6 +49,11 @@ class Lesson extends Model
         ]);
     }
 
+    public function poll()
+    {
+        return $this->belongsTo('App\Poll');
+    }
+
     public function rating()
     {
         return $this->lesson_results->sum('rating');

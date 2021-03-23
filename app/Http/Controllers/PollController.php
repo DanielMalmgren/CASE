@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Poll;
 use App\PollSession;
 use App\Workplace;
+use App\Country;
+use App\Locale;
 use Illuminate\Http\RedirectResponse;
 
 class PollController extends Controller
@@ -46,6 +48,7 @@ class PollController extends Controller
         ]);
 
         $poll = new Poll();
+        $poll->default_locale_id = \App::getLocale();
         $poll->save();
 
         return $this->update($request, $poll);
@@ -80,27 +83,18 @@ class PollController extends Controller
         return redirect('/poll')->with('success', __('Ändringar sparade'));
     }
 
-    public function exportresponses(Poll $poll) {
+    public function exportresponses(Request $request, Poll $poll) {
         $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('./xls-template/Pollresponses.xlsx');
         $worksheet = $spreadsheet->getSheetByName('Enkätsvar');
 
-        $worksheet->setCellValue('A1', 'Namn');
+        $worksheet->setCellValue('A1', __('Land'));
         $worksheet->getColumnDimension('A')->setAutoSize(true);
         $worksheet->getStyle('A1')->getFont()->setBold(true);
-        $worksheet->setCellValue('B1', 'Befattning');
+        $worksheet->setCellValue('B1', __('Språk'));
         $worksheet->getColumnDimension('B')->setAutoSize(true);
         $worksheet->getStyle('B1')->getFont()->setBold(true);
-        $worksheet->setCellValue('C1', 'Arbetsplats');
-        $worksheet->getColumnDimension('C')->setAutoSize(true);
-        $worksheet->getStyle('C1')->getFont()->setBold(true);
-        $worksheet->setCellValue('D1', 'Födelsedatum');
-        $worksheet->getColumnDimension('D')->setAutoSize(true);
-        $worksheet->getStyle('D1')->getFont()->setBold(true);
-        $worksheet->setCellValue('E1', 'Kön');
-        $worksheet->getColumnDimension('E')->setAutoSize(true);
-        $worksheet->getStyle('E1')->getFont()->setBold(true);
 
-        $i = 6;
+        $i = 3;
         $column_order = [];
         foreach($poll->poll_questions->where('type', '!=', 'pagebreak')->sortBy('order') as $question) {
             $cell = $worksheet->getCellByColumnAndRow($i, 1);
@@ -113,11 +107,12 @@ class PollController extends Controller
 
         $row = 2;
         foreach($poll->poll_sessions->where('finished', true) as $session) {
-            $worksheet->setCellValueByColumnAndRow(1, $row, $session->user->name);
-            $worksheet->setCellValueByColumnAndRow(2, $row, $session->user->title->name);
-            $worksheet->setCellValueByColumnAndRow(3, $row, $session->user->workplace->name);
-            $worksheet->setCellValueByColumnAndRow(4, $row, $session->user->birthdate);
-            $worksheet->setCellValueByColumnAndRow(5, $row, $session->user->gender);
+            if($session->country !== null) {
+                $worksheet->setCellValueByColumnAndRow(1, $row, $session->country->name);
+            } else {
+                $worksheet->setCellValueByColumnAndRow(1, $row, __('Land okänt'));
+            }
+            $worksheet->setCellValueByColumnAndRow(2, $row, $session->locale->name);
             foreach($session->poll_responses as $response) {
                 $worksheet->setCellValueByColumnAndRow($column_order[$response->poll_question->id], $row, $response->response);
             }
@@ -132,10 +127,14 @@ class PollController extends Controller
         $writer->save("php://output");
     }
 
-    public function show(Poll $poll): View {
+    public function show(Request $request, Poll $poll): View {
+        $geoip = geoip()->getLocation($request->ip);
+
         $poll_session = new PollSession();
         $poll_session->poll_id = $poll->id;
         $poll_session->user_id = Auth::user()->id;
+        $poll_session->country_id = Country::where('name', $geoip->country)->first()->id;
+        $poll_session->locale_id = Locale::find(\App::getLocale())->id;
         $poll_session->save();
 
         session(['poll_session_id' => $poll_session->id]);

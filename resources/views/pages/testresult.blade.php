@@ -19,6 +19,12 @@
 
             <br><br>
 
+            @if(isset($lesson->poll))
+                <a href="/poll/{{$lesson->poll_id}}">@lang('Vi vill gärna veta vad du tyckte om lektionen. Klicka här för att lämna din åsikt!')</a>
+            @endif
+
+            <br><br>
+
             @if($percent<100)
                 @lang('Inte riktigt alla rätt rakt igenom. Klicka på knappen nedan för att gå tilbaka till lektionen och repetera.')
                 <br><br>

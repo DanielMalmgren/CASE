@@ -22,4 +22,14 @@ class PollSession extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function locale(): BelongsTo
+    {
+        return $this->belongsTo('App\Locale');
+    }
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo('App\Country');
+    }
 }
