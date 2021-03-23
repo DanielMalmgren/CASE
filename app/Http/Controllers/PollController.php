@@ -72,13 +72,13 @@ class PollController extends Controller
         $poll->translateOrNew($currentLocale)->name = $request->name;
         $poll->translateOrNew($currentLocale)->infotext = $request->infotext;
         $poll->translateOrNew($currentLocale)->infotext2 = $request->infotext2;
-        $poll->active_from = $request->active_from;
+        /*$poll->active_from = $request->active_from;
         $poll->active_to = $request->active_to;
         $poll->scope_full_or_part_time = $request->scope_full_or_part_time;
-        $poll->scope_terms_of_employment = $request->scope_terms_of_employment;
+        $poll->scope_terms_of_employment = $request->scope_terms_of_employment;*/
         $poll->save();
 
-        $poll->workplaces()->sync($request->workplaces);
+        //$poll->workplaces()->sync($request->workplaces);
 
         return redirect('/poll')->with('success', __('Ändringar sparade'));
     }

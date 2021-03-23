@@ -26,6 +26,7 @@
             <textarea rows="4" name="infotext2" class="form-control twe"></textarea>
         </div>
 
+        {{--
         @lang('Målgrupp:') <br>
         <select id="workplaces" name="workplaces[]" multiple="multiple">
             @foreach($workplaces as $workplace)
@@ -57,6 +58,7 @@
         <input type="date" name="active_from" class="form-control">
         @lang('och')
         <input type="date" name="active_to" class="form-control">
+        --}}
 
         <br>
 
