@@ -32,35 +32,42 @@
             @else
                 @lang('Bra, alla rätt på första försöket!')<br><br>
 
-                <form method="post" name="pdfdiploma" action="{{action('TestResultController@pdfdiploma', $test_session->id)}}" accept-charset="UTF-8">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="name">@lang('Ditt namn')</label>
-                        <input name="name" class="form-control" id="name" required>
-                    </div>
+                @if($lesson->next() === null)
 
-                    <button class="btn btn-primary btn-lg btn-primary" type="submit">@lang('Skriv ut diplom')</button>
+                    @lang('Du är nu färdig med detta spår och kan välja mellan att skriva ut ett diplom eller skicka ett mail direkt ifrån plattformen som intygar detta.')<br><br>
 
-                </form>
+                    <form method="post" name="pdfdiploma" action="{{action('TestResultController@pdfdiploma', $test_session->id)}}" accept-charset="UTF-8">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name">@lang('Ditt namn')</label>
+                            <input name="name" class="form-control" id="name" required>
+                        </div>
 
-                <br>
+                        <button class="btn btn-primary btn-lg btn-primary" type="submit">@lang('Skriv ut diplom')</button>
 
-                <form method="post" name="resultmail" id="resultmail" action="{{action('TestResultController@resultmail', $test_session->id)}}" accept-charset="UTF-8">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="name">@lang('Ditt namn')</label>
-                        <input name="name" class="form-control" id="name" required>
-                    </div>
+                    </form>
 
-                    <div class="mb-3">
-                        <label for="email">@lang('Mailadress att skicka intyg till')</label>
-                        <input type="email" name="email" class="form-control" id="email" required>
-                    </div>
+                    <br>
 
-                    <x-honey recaptcha/>
-                    <button class="btn btn-primary btn-lg btn-primary" type="submit">@lang('Skicka mail med intyg')</button>
+                    <form method="post" name="resultmail" id="resultmail" action="{{action('TestResultController@resultmail', $test_session->id)}}" accept-charset="UTF-8">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name">@lang('Ditt namn')</label>
+                            <input name="name" class="form-control" id="name" required>
+                        </div>
 
-                </form>
+                        <div class="mb-3">
+                            <label for="email">@lang('Mailadress att skicka intyg till')</label>
+                            <input type="email" name="email" class="form-control" id="email" required>
+                        </div>
+
+                        <x-honey recaptcha/>
+                        <button class="btn btn-primary btn-lg btn-primary" type="submit">@lang('Skicka mail med intyg')</button>
+
+                    </form>
+                @else
+                    <a href="/lessons/{{$lesson->next()->id}}" class="btn btn-primary">@lang('Nästa lektion')</a>
+                @endif
 
             @endif
 

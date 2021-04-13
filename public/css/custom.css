@@ -111,6 +111,25 @@ audio {
   }
 
 /*
+* ====================== Footer ===========================
+*/
+
+.footer-logo {
+    height:100px;
+}
+
+.footer-half-logo {
+    height:70px;
+}
+
+footer img {
+    width:auto;
+    margin-right:auto;
+    margin-left:auto;
+    display:block;
+}
+
+/*
 * ====================== Flip cards ===========================
 */
 

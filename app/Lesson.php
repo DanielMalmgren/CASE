@@ -49,6 +49,11 @@ class Lesson extends Model
         ]);
     }
 
+    public function next()
+    {
+        return $this->track->lessons->where('order', '>', $this->order)->sortBy('order')->first();
+    }
+
     public function poll()
     {
         return $this->belongsTo('App\Poll');
