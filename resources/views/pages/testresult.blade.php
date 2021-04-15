@@ -20,7 +20,7 @@
             <br><br>
 
             @if(isset($lesson->poll))
-                <a href="/poll/{{$lesson->poll_id}}">@lang('Vi vill gärna veta vad du tyckte om lektionen. Klicka här för att lämna din åsikt!')</a>
+                <a href="/poll/{{$lesson->poll_id}}/{{$lesson->id}}">@lang('Vi vill gärna veta vad du tyckte om lektionen. Klicka här för att lämna din åsikt!')</a>
             @endif
 
             <br><br>

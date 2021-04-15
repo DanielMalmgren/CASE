@@ -10,6 +10,7 @@ use App\PollSession;
 use App\Workplace;
 use App\Country;
 use App\Locale;
+use App\Lesson;
 use Illuminate\Http\RedirectResponse;
 
 class PollController extends Controller
@@ -93,8 +94,14 @@ class PollController extends Controller
         $worksheet->setCellValue('B1', __('Språk'));
         $worksheet->getColumnDimension('B')->setAutoSize(true);
         $worksheet->getStyle('B1')->getFont()->setBold(true);
+        $worksheet->setCellValue('C1', __('Spår'));
+        $worksheet->getColumnDimension('C')->setAutoSize(true);
+        $worksheet->getStyle('C1')->getFont()->setBold(true);
+        $worksheet->setCellValue('D1', __('Lektion'));
+        $worksheet->getColumnDimension('D')->setAutoSize(true);
+        $worksheet->getStyle('D1')->getFont()->setBold(true);
 
-        $i = 3;
+        $i = 5;
         $column_order = [];
         foreach($poll->poll_questions->where('type', '!=', 'pagebreak')->sortBy('order') as $question) {
             $cell = $worksheet->getCellByColumnAndRow($i, 1);
@@ -113,6 +120,10 @@ class PollController extends Controller
                 $worksheet->setCellValueByColumnAndRow(1, $row, __('Land okänt'));
             }
             $worksheet->setCellValueByColumnAndRow(2, $row, $session->locale->name);
+            if($session->lesson !== null) {
+                $worksheet->setCellValueByColumnAndRow(3, $row, $session->lesson->track->translation()->name);
+                $worksheet->setCellValueByColumnAndRow(4, $row, $session->lesson->translation()->name);
+            }
             foreach($session->poll_responses as $response) {
                 $worksheet->setCellValueByColumnAndRow($column_order[$response->poll_question->id], $row, $response->response);
             }
@@ -127,7 +138,7 @@ class PollController extends Controller
         $writer->save("php://output");
     }
 
-    public function show(Request $request, Poll $poll): View {
+    public function show(Request $request, Poll $poll, Lesson $lesson=null): View {
         $geoip = geoip()->getLocation($request->ip);
 
         $poll_session = new PollSession();
@@ -135,6 +146,9 @@ class PollController extends Controller
         $poll_session->user_id = Auth::user()->id;
         $poll_session->country_id = Country::where('name', $geoip->country)->first()->id;
         $poll_session->locale_id = Locale::find(\App::getLocale())->id;
+        if($lesson !== null) {
+            $poll_session->lesson_id = $lesson->id;
+        }
         $poll_session->save();
 
         session(['poll_session_id' => $poll_session->id]);

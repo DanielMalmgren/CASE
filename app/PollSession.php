@@ -28,6 +28,11 @@ class PollSession extends Model
         return $this->belongsTo('App\Locale');
     }
 
+    public function lesson(): BelongsTo
+    {
+        return $this->belongsTo('App\Lesson');
+    }
+
     public function country(): BelongsTo
     {
         return $this->belongsTo('App\Country');

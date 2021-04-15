@@ -11,7 +11,7 @@
             @foreach($polls as $poll)
                 <li class="list-group-item d-flex justify-content-between lh-condensed nopadding" id="id-{{$poll->id}}">
                     <a href="/poll/{{$poll->id}}/edit">
-                        <h6 class="my-0">{{$poll->translateOrDefault(App::getLocale())->name}}
+                        <h6 class="my-0">{{$poll->translation()->name}}
                         </h6>
                     </a>
                 </li>
