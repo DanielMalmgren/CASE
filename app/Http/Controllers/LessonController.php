@@ -359,6 +359,9 @@ class LessonController extends Controller
         //Loop through all changed page breaks
         if($request->pagebreak) {
             foreach($request->pagebreak as $pagebreak_id => $pagebreak_text) {
+                if($pagebreak_text === null) {
+                    $pagebreak_text = '';
+                }
                 $content = Content::find($pagebreak_id);
                 if($content->translateOrNew($currentLocale)->text != $pagebreak_text) {
                     logger("Page break ".$pagebreak_id." is being changed");

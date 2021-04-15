@@ -173,48 +173,6 @@ class User extends Authenticatable
         return $monthtotal;
     }
 
-    public function time_rows(int $year, int $month): array
-    {
-        $time_rows = [];
-        $rowtitle = __('Tid i lärplattformen');
-        $monthtotal = 0;
-
-        $total = 0;
-        for($i = 1; $i <= 31; $i++) {
-            $this_time = ActiveTime::where('user_id', $this->id)->whereMonth('date', (string)$month)->whereYear('date', (string)$year)->whereDay('date', (string)$i)->first();
-            if($this_time) {
-                $time_rows[$rowtitle][$i] = round($this_time->seconds/3600, 1);
-                $total += round($this_time->seconds/3600, 1);
-            }
-        }
-        $time_rows[$rowtitle][32] = $total;
-        $monthtotal += $total;
-
-        $types = $this->project_times()->whereMonth('date', (string)$month)->whereYear('date', (string)$year)->groupBy('project_time_type_id')->pluck('project_time_type_id');
-        foreach($types as $type) {
-            $rowtitle = ProjectTimeType::find($type)->name;
-            $typetotal = 0;
-            $dates = $this->project_times()->where('project_time_type_id', $type)->whereMonth('date', (string)$month)->whereYear('date', (string)$year)->groupBy('date')->pluck('date');
-            foreach($dates as $date) {
-                $occasions = $this->project_times()->where('project_time_type_id', $type)->where('date', $date)->get();
-                $minutes = 0;
-                foreach($occasions as $occasion) {
-                     $minutes += $occasion->minutes;
-                }
-                $day = date('j', strtotime($date));
-                $time_rows[$rowtitle][$day] = round($minutes/60, 1);
-                $typetotal += round($minutes/60, 1);
-            }
-            $time_rows[$rowtitle][32] = $typetotal; //Use the 32th day of the month for the total. Maybe a bit ugly?
-            $monthtotal += $typetotal;
-        }
-
-        $rowtitle = __('Summa');
-        $time_rows[$rowtitle][32] = $monthtotal;
-
-        return $time_rows;
-    }
-
     //Get the next logical lesson for the user
     public function next_lesson(): ?Lesson
     {

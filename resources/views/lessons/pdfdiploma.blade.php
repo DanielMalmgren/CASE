@@ -16,19 +16,19 @@
             color: #36a9e1;
             font-size: 50px;
         }
-        .name {
-            margin-top: 535px;
-        }
-        .unit {
-            margin-top: 80px;
+        .content {
+            margin-top: 450px;
+            line-height: 150%;
         }
     </style>
 
-    <div class="name">
-        {{$name}}
-    </div>
+    <div class="content">
+        @lang('Detta diplom intygar att')<br>
 
-    <div class="unit">
+        {{$name}}<br>
+
+        @lang('framgångsrikt har genomfört')<br>
+
         {{$lesson->track->translateOrDefault(App::getLocale())->name}}
     </div>
 

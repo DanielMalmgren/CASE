@@ -34,15 +34,6 @@
             </select>
         </div>
 
-        {{--<br><br>
-
-        @lang('mellan')
-        <input type="date" name="active_from" class="form-control" value="{{$poll->active_from}}">
-        @lang('och')
-        <input type="date" name="active_to" class="form-control" value="{{$poll->active_to}}">
-
-        --}}
-
         <br>
 
         <button class="btn btn-primary btn-lg btn-primary" type="submit">@lang('Spara')</button>
@@ -69,7 +60,7 @@
                         @else
                             @lang('flervalsfråga med :alternatives alternativ', ['alternatives' => count($question->alternatives_array)])
                         @endif
-                        {{$question->display_criteria!=''?'(har visningskriterium)':''}}
+                        {{$question->display_criteria!=''?'(__("har visningskriterium"))':''}}
                     @endif
                 </div>
             </a>

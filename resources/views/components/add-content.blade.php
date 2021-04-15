@@ -33,7 +33,7 @@ $(function() {
                 <div id="new_vimeo[`+new_id+`]" data-id="`+new_id+`" class="card">
                     <div class="card-body">
                         <span class="handle"><i class="fas fa-arrows-alt-v"></i></span>
-                        <label class="handle" for="new_vimeo[`+new_id+`]">@lang('Video-film')</label>
+                        <label class="handle" for="new_vimeo[`+new_id+`]">@lang('Vimeo-film')</label>
                         <a href="#" class="close remove_field" data-dismiss="alert" aria-label="close">&times;</a>
                         <div class="container">
                             <div class="row">
