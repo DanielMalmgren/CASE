@@ -15,6 +15,7 @@
             text-align: center;
             color: #36a9e1;
             font-size: 50px;
+            font-family: Arial Bold;
         }
         .content {
             margin-top: 450px;

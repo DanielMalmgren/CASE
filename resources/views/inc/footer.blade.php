@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 footer-logo">
-                <a target="_blank" href="https://www.linkoping.se/utforarwebben/vard-stod-och-omsorg/forskning-och-utveckling/pagaende-projekt/evikomp/"><img src="/images/CASE_biglogo.png" style="max-height:120px"><a>
+                <a target="_blank" href="https://www.linkoping.se/utforarwebben/vard-stod-och-omsorg/forskning-och-utveckling/fou-projekt-satsningar-och-aktiviteter/case---care-skills-escalator/"><img src="/images/CASE_biglogo.png" style="max-height:120px"><a>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 p-0">
                 <div class="footer-half-logo">

@@ -51,7 +51,7 @@ class TestResultController extends Controller
 
         $pdf = PDF::loadView('lessons.pdfdiploma', $data);
 
-        return $pdf->download('diploma.pdf');
+        return $pdf->download('certificate.pdf');
     }
 
     public function resultmail(TestSession $test_session, Request $request) {

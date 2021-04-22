@@ -145,6 +145,6 @@ class TrackController extends Controller
 
         $pdf = PDF::loadView('tracks.pdfdiploma', $data);
 
-        return $pdf->download('diploma.pdf');
+        return $pdf->download('certificate.pdf');
     }
 }

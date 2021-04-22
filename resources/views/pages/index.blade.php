@@ -4,6 +4,14 @@
 
 @section('content')
 
+<div class="card">
+    <div class="card-body">
+        @lang('messages.infotext')
+    </div>
+</div>
+
+<br>
+
 <H1>@lang('Nyheter')</H1>
 
 @if(count($announcements) > 0)

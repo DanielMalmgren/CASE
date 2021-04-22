@@ -2,6 +2,6 @@
 
 @section('content')
 
-<H1>Om</H1>
+<H1>@lang('Om')</H1>
 
 @endsection
