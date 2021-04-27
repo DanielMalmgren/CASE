@@ -4,6 +4,8 @@
 
 @section('content')
 
+<H1>@lang('Välkommen till lärplattformen för Case!')</H1>
+
 <div class="card">
     <div class="card-body">
         @lang('messages.infotext')

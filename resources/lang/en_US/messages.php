@@ -8,8 +8,7 @@ return [
                    Your personal data will be available to the system administrators, your boss and workplace administrator and ESF and SCB for follow-up of project financing.<br>
                    Statistical data from the project in anonymized form will be used for research and development.<br><br>
                    By clicking "Continue" below you admit that you have been informed about the abovementioned storage.',
-    'infotext' => 'Welcome to learn in the Case platform!<br>
-                    This platform is a collaboration between five partners in five European countries. We share common challenges due to an aging population in Europe. Dementia diseases are increasing, and we would like to provide the best care possible.<br>
+    'infotext' => 'This platform is a collaboration between five partners in five European countries. We share common challenges due to an aging population in Europe. Dementia diseases are increasing, and we would like to provide the best care possible.<br>
                     Therefore, we need trained, skilled staff. This platform offers new and somewhat experienced workforce in the health- and care- sector an opportunity to develop knowledge about dementia and how to care for the persons with the diseases.<br><br>
                     
                     Case is co-founded by the European Union through the Erasmus+ programme.<br><br>

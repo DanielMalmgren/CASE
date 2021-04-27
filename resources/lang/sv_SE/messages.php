@@ -1,18 +1,11 @@
 <?php
 
 return [
-    'gdprinfo' => 'Evikomp är ett ESF-projekt.<br>
-                   <a href="https://www.linkoping.se/utforarwebben/vard-stod-och-omsorg/forskning-och-utveckling/pagaende-projekt/evikomp/">
-                   För mer information om projektet klicka här.</a><br><br>
-                   Denna webplattform är en del av projektet. För att du ska kunna använda den behöver dina personuppgifter lagras.<br><br>
-                   Dina personuppgifter kommer att vara tillgängliga för de systemansvariga, din chef och arbetsplatskoordinator samt personal på Europeiska Socialfonden (ESF) samt Statistiska Centralbyrån (SCB) för uppföljning av projektfinansieringen.<br>
-                   Statistiska uppgifter från projektet kommer i anonymiserad form att användas för forskning och utveckling.<br><br>
-                   Genom att klicka på "Fortsätt" nedan medger du att du har blivit informerad om ovan beskrivna lagring.',
-    'infotext' => 'Välkommen till lärplattformen för Case!<br>
-                   This platform is a collaboration between five partners in five European countries. We share common challenges due to an aging population in Europe. Dementia diseases are increasing, and we would like to provide the best care possible.<br>
-                   Therefore, we need trained, skilled staff. This platform offers new and somewhat experienced workforce in the health- and care- sector an opportunity to develop knowledge about dementia and how to care for the persons with the diseases.<br><br>
+    'infotext' => 'Denna platform är utvecklad i ett samarbet mellan fem parter i fem europeiska länder.
+                   Vi har gemensamma utmaningar som följd av en åldrande befolkning i Europa. Demenssjukdomar ökar och vi vill erbjuda bästa möjliga vård.<br>
+                   Därför behövs det välutbildad och skicklig personal. Denna plattform erbjuder ny och oerfaren personal inom vård- och omsorgssektorn en möjlighet att utveckla kunskap gällande demens och omsorg om personer med sjukdomarna.<br><br>
                    
-                   Case is co-founded by the European Union through the Erasmus+ programme.<br><br>
+                   Case är medfinansierat av Europeiska Unionen genom Erasmus+.<br><br>
                    
                    The project proposal was initiated by the Research and Development Centre City of Linkoping which is a collaboration of municipalities in the Region of Östgötland and the University of Linkoping and has close working relations with a network of public and private providers of care, social services and social work within the region as well as with the national R&D-Centres network in Sweden. The other 4 partners in the project were;<br>
                    <ul>
