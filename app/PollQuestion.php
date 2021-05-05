@@ -52,7 +52,7 @@ class PollQuestion extends Model
 
     public function getAlternativesArrayAttribute()
     {
-        return explode(';', $this->translateOrDefault(\App::getLocale())->alternatives);
+        return explode(';', $this->translation()->alternatives);
     }
 
     public function setAlternativesArrayAttribute($value)

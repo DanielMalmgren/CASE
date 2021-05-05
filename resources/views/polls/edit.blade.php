@@ -60,7 +60,7 @@
                         @else
                             @lang('flervalsfråga med :alternatives alternativ', ['alternatives' => count($question->alternatives_array)])
                         @endif
-                        {{$question->display_criteria!=''?'(__("har visningskriterium"))':''}}
+                        {{$question->display_criteria!=''?__("har visningskriterium"):''}}
                     @endif
                 </div>
             </a>

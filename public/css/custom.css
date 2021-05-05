@@ -2,6 +2,10 @@
 * ====================== Various ===========================
 */
 
+.smllogo img {
+    width: 50px !important;
+}
+
 html, body {
     font-size: 18px !important;
 }
