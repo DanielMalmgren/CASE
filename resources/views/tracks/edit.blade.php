@@ -4,6 +4,16 @@
 
 <div class="col-md-6">
 
+<script type="text/javascript">
+    $(function() {
+        $('#limited_by_country').on('change', function() {
+            var val = this.checked;
+            $("#countries").toggle(this.checked);
+        });
+
+    });
+</script>
+
     <H1>@lang('Redigera spår')</H1>
 
     <form method="post" action="{{action('TrackController@update', $track->id)}}" accept-charset="UTF-8" enctype="multipart/form-data">
@@ -52,6 +62,17 @@
         <div class="mb-3">
             <input type="hidden" name="active" value="0">
             <label><input type="checkbox" name="active" value="1" {{$track->active?"checked":""}}>@lang('Aktiv')</label>
+        </div>
+
+        <div class="mb-3">
+            <input type="hidden" name="limited_by_country" value="0">
+            <label><input type="checkbox" name="limited_by_country" id="limited_by_country" value="1" {{$track->limited_by_country?"checked":""}}>@lang('Begränsad enbart till vissa länder')</label>
+        </div>
+
+        <div id="countries" class="ml-5" style="{{!$track->limited_by_country?"display: none;":""}}">
+            @foreach($countries as $country)
+                <label><input type="checkbox" {{$track->countries->contains('id', $country->id)?"checked":""}} name="countries[]" value="{{$country->id}}">{{$country->name}}</label><br>
+            @endforeach
         </div>
 
         <br>

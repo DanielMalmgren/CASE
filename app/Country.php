@@ -15,4 +15,9 @@ class Country extends Model
         return $this->belongsToMany('App\Lesson');
     }
 
+    public function tracks(): BelongsToMany
+    {
+        return $this->belongsToMany('App\Track');
+    }
+
 }

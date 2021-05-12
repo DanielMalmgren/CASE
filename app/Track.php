@@ -30,6 +30,11 @@ class Track extends Model
         return $this->belongsToMany('App\User');
     }
 
+    public function countries()
+    {
+        return $this->belongsToMany('App\Country');
+    }
+
     public function default_locale(): BelongsTo
     {
         return $this->belongsTo('App\Locale', 'default_locale_id');

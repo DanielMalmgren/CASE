@@ -13,7 +13,26 @@ use PDF;
 class TrackController extends Controller
 {
     public function index(Request $request) {
-        $tracks = Track::orderBy('order')->get();
+        if(Auth::user() !== null && Auth::user()->can('manage lessons')) {
+            $tracks = Track::orderBy('order')->get();
+        } else {
+            $geoip = geoip()->getLocation($request->ip);
+            $country = Country::where('name', $geoip->country)->first();
+            if($country !== null) {
+                $country_id = $country->id;
+            } else {
+                $country_id = -1; //Country didn't match any country in our list
+            }
+
+            $tracks = Track::where('active', true)
+                ->where(static function ($query) use ($country_id) {
+                    $query->whereHas('countries', static function ($query) use ($country_id) {
+                        $query->where('id', $country_id);
+                    })
+                ->orWhere('limited_by_country', false);
+                })
+                ->orderBy('order')->get();
+        }
 
         $data = [
             'tracks' => $tracks,
@@ -65,6 +84,7 @@ class TrackController extends Controller
         $data = [
             'locales' => Locale::orderBy('name')->get(),
             'colors' => Color::all(),
+            'countries' => Country::all(),
         ];
         return view('tracks.create')->with($data);
     }
@@ -91,6 +111,7 @@ class TrackController extends Controller
             'track' => $track,
             'locales' => Locale::orderBy('name')->get(),
             'colors' => Color::all(),
+            'countries' => Country::all(),
         ];
         return view('tracks.edit')->with($data);
     }
@@ -126,7 +147,10 @@ class TrackController extends Controller
         $track->translateOrNew($currentLocale)->name = $request->name;
         $track->translateOrNew($currentLocale)->subtitle = $request->subtitle;
         $track->active = $request->active;
+        $track->limited_by_country = $request->limited_by_country;
         $track->save();
+
+        $track->countries()->sync($request->countries);
 
         return redirect('/tracks/'.$track->id)->with('success', __('Ändringar sparade'));
     }
