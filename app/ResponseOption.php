@@ -14,6 +14,16 @@ class ResponseOption extends Model
     {
         return $this->belongsTo('App\Question');
     }
+
+    public function translation()
+    {
+        $translation = $this->translate(\App::getLocale());
+        if(isset($translation)) {
+            return $translation;
+        } else {
+            return $this->translate($this->question->lesson->track->default_locale->id);
+        }
+    }
 }
 
 class ResponseOptionTranslation extends Model

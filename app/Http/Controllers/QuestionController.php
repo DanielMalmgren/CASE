@@ -130,7 +130,7 @@ class QuestionController extends Controller
         if($request->response_option_text) {
             foreach($request->response_option_text as $response_option_id => $response_option_text) {
                 $response_option = ResponseOption::find($response_option_id);
-                $response_option->text = $response_option_text;
+                $response_option->translateOrNew($currentLocale)->text = $response_option_text;
                 $response_option->isCorrectAnswer = isset($request->response_option_correct) && in_array($response_option_id, $request->response_option_correct);
                 $response_option->save();
             }
@@ -147,7 +147,7 @@ class QuestionController extends Controller
         if($request->new_response_option_text) {
             foreach($request->new_response_option_text as $response_option_id => $response_option_text) {
                 $response_option = new ResponseOption();
-                $response_option->text = $response_option_text;
+                $response_option->translateOrNew($currentLocale)->text = $response_option_text;
                 if($request->new_response_option_correct) {
                     $response_option->isCorrectAnswer = isset($request->new_response_option_correct) && in_array($response_option_id, $request->new_response_option_correct);
                 } else {
