@@ -5,11 +5,11 @@
 
 @section('content')
 
-    <H1>{{$poll->translateOrDefault(App::getLocale())->name}}</H1>
+    <H1>{{$poll->translation()->name}}</H1>
 
     <div class="card">
             <div class="card-body">
-                {!!$poll->translateOrDefault(App::getLocale())->infotext!!}
+                {!!$poll->translation()->infotext!!}
             </div>
     </div>
 

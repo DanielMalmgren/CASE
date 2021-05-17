@@ -143,9 +143,15 @@ class PollController extends Controller
 
         $poll_session = new PollSession();
         $poll_session->poll_id = $poll->id;
-        $poll_session->user_id = Auth::user()->id;
+        if(Auth::user() !== null) {
+            $poll_session->user_id = Auth::user()->id;
+        }
         $poll_session->country_id = Country::where('name', $geoip->country)->first()->id;
-        $poll_session->locale_id = Locale::find(\App::getLocale())->id;
+        logger(\App::getLocale());
+        $locale = Locale::find(\App::getLocale());
+        if($locale !== null) {
+            $poll_session->locale_id = $locale->id;
+        }
         if($lesson !== null) {
             $poll_session->lesson_id = $lesson->id;
         }
