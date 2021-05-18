@@ -42,7 +42,7 @@
                             @if($question->lesson->track->current_locale_is_track_default())
                                 <a href="#" class="close remove_field" data-dismiss="alert" aria-label="close">&times;</a>
                             @endif
-                            <input name="response_option_text[{{$response_option->id}}]" class="form-control original-content" value="{{$response_option->translateOrDefault(App::getLocale())->text}}">
+                            <input name="response_option_text[{{$response_option->id}}]" class="form-control original-content" value="{{$response_option->translation()->text}}">
                             <label for="response_option_correct[{{$response_option->id}}]">@lang('Är svarsalternativet rätt?')</label>
                             <input type="checkbox" {{$response_option->isCorrectAnswer?"checked":""}} name="response_option_correct[{{$response_option->id}}]" value="{{$response_option->id}}">
                         </div>

@@ -1,6 +1,6 @@
 @extends('layouts.pdfapp')
 
-@section('title', $lesson->translateOrDefault(App::getLocale())->name)
+@section('title', $lesson->translation()->name)
 
 @section('content')
 
@@ -14,7 +14,7 @@
             background-size: cover;
             text-align: center;
             color: #36a9e1;
-            font-size: 50px;
+            font-size: 45px;
             font-family: Arial Bold;
         }
         .content {
@@ -30,7 +30,7 @@
 
         @lang('framgångsrikt har genomfört')<br>
 
-        {{$lesson->track->translateOrDefault(App::getLocale())->name}}
+        {{$lesson->track->translation()->name}}
     </div>
 
 @endsection

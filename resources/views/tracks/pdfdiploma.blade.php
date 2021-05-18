@@ -1,6 +1,6 @@
 @extends('layouts.pdfapp')
 
-@section('title', $track->translateOrDefault(App::getLocale())->name)
+@section('title', $track->translation()->name)
 
 @section('content')
 
@@ -15,7 +15,7 @@
 
     <H2>Tilldelat {{$user->name}}
     För aktivt deltagande och godkänt genomförande
-    av Evikomps utbildning i {{$track->translateOrDefault(App::getLocale())->name}}</H2>
+    av Evikomps utbildning i {{$track->translation()->name}}</H2>
     </center>
 
     <div class="completedlist">
@@ -26,7 +26,7 @@
             <ul>
             @foreach($lessons as $lesson)
                 <li class="mb-0">
-                    {{$lesson->translateOrDefault(App::getLocale())->name}}
+                    {{$lesson->translation()->name}}
                 </li>
             @endforeach
             </ul>

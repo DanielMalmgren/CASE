@@ -74,7 +74,7 @@
                     <div class="card-body">
             @foreach($question->response_options as $response_option)
                 <div class="radio">
-                    <label><input type="radio" name="singleresponse" value="{{$response_option->id}}" onclick="document.question.submit.disabled=false;">{{$response_option->translateOrDefault(App::getLocale())->text}}</label>
+                    <label><input type="radio" name="singleresponse" value="{{$response_option->id}}" onclick="document.question.submit.disabled=false;">{{$response_option->translation()->text}}</label>
                 </div>
             @endforeach
                     </div>
@@ -88,7 +88,7 @@
             <p>@lang('(Ange :alternatives alternativ)', ['alternatives' => $question->correctAnswers])</p>
             @foreach($question->response_options as $response_option)
                 <div class="checkbox">
-                    <label><input type="checkbox" name="multiresponse[]" value="{{$response_option->id}}" id="{{$response_option->id}}" onclick="chkcontrol({{$response_option->id}})">{{$response_option->translateOrDefault(App::getLocale())->text}}</label>
+                    <label><input type="checkbox" name="multiresponse[]" value="{{$response_option->id}}" id="{{$response_option->id}}" onclick="chkcontrol({{$response_option->id}})">{{$response_option->translation()->text}}</label>
                 </div>
             @endforeach
                     </div>
