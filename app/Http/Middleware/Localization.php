@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Locale;
 
 class Localization
 {
@@ -18,12 +19,12 @@ class Localization
         $user = \Auth::user();
         if(isset($user)) {
             \App::setLocale($user->locale_id);
+            setlocale(LC_TIME, $user->locale_id);
         } else {
-            $browserlocale = str_replace('-', '_', substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 5));
-            if($browserlocale == 'en_GB') {
-                $browserlocale = 'en_US';
-            }
-            \App::setLocale($browserlocale);
+            $localefirstletters = substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
+            $locale = Locale::where('id', 'like', $localefirstletters.'%')->first();
+            \App::setLocale($locale->id);
+            setlocale(LC_TIME, $locale->id);
         }
 
         return $next($request);

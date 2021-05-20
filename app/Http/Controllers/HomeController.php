@@ -13,16 +13,6 @@ class HomeController extends Controller
     public function index(Request $request) {
         $announcements = Announcement::All()->sort()->reverse()->take(5);
 
-        $browserlocale = str_replace('-', '_', substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 5));
-
-        logger("Locale: ".$browserlocale);
-
-        logger("GeoIP information:");
-        $geoip = geoip()->getLocation($request->ip);
-        logger(print_r($geoip, true));
-
-        setlocale(LC_TIME, $browserlocale);
-
         $data = [
             'announcements' => $announcements,
         ];
