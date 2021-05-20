@@ -11,24 +11,26 @@ class TestResultController extends Controller
 {
     public function show(TestSession $test_session, Request $request) {
 
-        /*if($test_session->percent() === 100) {
-            $resulttext = __('Grattis, du hade rätt på :percent% av frågorna på första försöket!', ['percent' => $test_session->percent()]);
-        } elseif($test_session->percent() > 74) {
-            $resulttext = __('Du hade rätt på :percent% av frågorna på första försöket!', ['percent' => $test_session->percent()]);
-        } else {
-            $resulttext = __('Du hade bara rätt på :percent% av frågorna på första försöket!', ['percent' => $test_session->percent()]);
-        }*/
-
         if($request->session()->get('test_session_id') != $test_session->id) {
             abort(403);
         }
 
+        //If there is no poll attached we don't need the test session id anymore
+        $poll = $test_session->lesson->poll;
+        if(!isset($poll)) {
+            $request->session()->forget('test_session_id');
+        }
+        //If an attached poll has already been answered, don't care about it any longer
+        if($request->session()->pull('poll_session_id') !== null) {
+            $request->session()->forget('test_session_id');
+            $poll = null;
+        }
+
         $data = [
             'test_session' => $test_session,
-            //'nextlesson' => Auth::user()->next_lesson(),
-            //'resulttext' => $resulttext,
             'lesson' => $test_session->lesson,
             'percent' => $test_session->percent(),
+            'poll' => $poll,
         ];
 
         return view('pages.testresult')->with($data);

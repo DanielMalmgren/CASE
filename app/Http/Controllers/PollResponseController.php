@@ -7,6 +7,7 @@ use App\Poll;
 use App\PollResponse;
 use App\PollQuestion;
 use App\PollSession;
+use App\TestSession;
 
 class PollResponseController extends Controller
 {
@@ -42,12 +43,15 @@ class PollResponseController extends Controller
             if(isset($nextquestion)) {
                 return redirect('/pollquestion/'.$nextquestion->id);
             } else {
-                $poll_session = PollSession::find(session("poll_session_id"));
+                $poll_session = PollSession::find($request->session()->get("poll_session_id"));
                 $poll_session->finished = true;
                 $poll_session->save();
 
+                $test_session = TestSession::find($request->session()->get('test_session_id'));
+
                 $data = [
                     'poll' => $poll_session->poll,
+                    'test_session' => $test_session,
                 ];
 
                 return view('polls.feedback')->with($data);

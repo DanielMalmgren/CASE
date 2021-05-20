@@ -19,12 +19,6 @@
 
             <br><br>
 
-            @if(isset($lesson->poll))
-                <a href="/poll/{{$lesson->poll_id}}/{{$lesson->id}}">@lang('Vi vill gärna veta vad du tyckte om lektionen. Klicka här för att lämna din åsikt!')</a>
-            @endif
-
-            <br><br>
-
             @if($percent<100)
                 @lang('Inte riktigt alla rätt rakt igenom. Klicka på knappen nedan för att gå tilbaka till lektionen och repetera.')
                 <br><br>
@@ -32,7 +26,13 @@
             @else
                 @lang('Bra, alla rätt på första försöket!')<br><br>
 
-                @if($lesson->next() === null)
+                @if($poll !== null)
+                    @lang('Innan du är helt färdig vill vi dock ha din feedback på innehållet. Klicka nedan!')
+                    <br><br>
+                    <a href="/poll/{{$poll->id}}" class="btn btn-primary">@lang('Gå till enkät')</a>
+                @elseif($lesson->next() !== null)
+                    <a href="/lessons/{{$lesson->next()->id}}" class="btn btn-primary">@lang('Nästa lektion')</a>
+                @else
 
                     @lang('Du är nu färdig med detta spår och kan välja mellan att skriva ut ett diplom eller skicka ett mail direkt ifrån plattformen som intygar detta.')<br><br>
 
@@ -65,8 +65,6 @@
                         <button class="btn btn-primary btn-lg btn-primary" type="submit">@lang('Skicka mail med intyg')</button>
 
                     </form>
-                @else
-                    <a href="/lessons/{{$lesson->next()->id}}" class="btn btn-primary">@lang('Nästa lektion')</a>
                 @endif
 
             @endif

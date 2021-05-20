@@ -13,5 +13,9 @@
         </div>
     </div>
 
+    @isset($test_session)
+        <br><br>
+        <a href="/test/result/{{$test_session->id}}" class="btn btn-primary">@lang('Tillbaka till ditt testresultat')</a>
+    @endisset
 
 @endsection
