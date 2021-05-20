@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Lesson;
 use App\TestSession;
+use App\Country;
+use App\Locale;
 
 class FeedbackController extends Controller
 {
-    public function create() {
+    public function create(Request $request) {
 
         $lessons = Lesson::orderBy('track_id')->orderBy('order')->where('active', true)->get();
 
@@ -22,9 +24,14 @@ class FeedbackController extends Controller
             $activelesson = null;
         }
 
+        $geoip = geoip()->getLocation($request->ip);
+        $users_country = Country::where('name', $geoip->country)->first();
+
         $data = [
             'lessons' => $lessons,
             'activelesson' => $activelesson,
+            'countries' => Country::all(),
+            'users_country' => $users_country,
         ];
 
         return view('feedback.create')->with($data);
@@ -35,22 +42,27 @@ class FeedbackController extends Controller
             'content' => 'required',
         ]);
 
-        if(!isset($request->anonymous)) {
-            $name = Auth::user()->name;
-            $email = Auth::user()->email;
-            $mobile = Auth::user()->mobile;
+        $name = $request->name;
+        $email = $request->email;
+
+        $country = Country::find($request->country);
+
+        if(isset($country)) {
+            $contact_env = 'CONTACT_'.strtoupper(str_replace(' ', '_', $country->name));
         } else {
-            $name = __('Anonym användare');
-            $email = env('MAIL_FROM_ADDRESS');
-            $mobile = '';
+            $contact_env = 'CONTACT_GENERAL';
         }
 
-        $workplace = '';
+        $geoip = geoip()->getLocation($request->ip);
+        $users_country = Country::where('name', $geoip->country)->first();
+
+        $currentLocale = Locale::find(\App::getLocale());
+
         $to = [];
-        $to[] = ['email' => env('FEEDBACK_RECIPIENT_ADDRESS'), 'name' => env('FEEDBACK_RECIPIENT_NAME')];
+        $to[] = ['email' => env($contact_env), 'name' => 'CASE contact'];
 
-        \Mail::to($to)->send(new \App\Mail\Feedback($request->content, $request->lesson, $name, $email, $mobile, $workplace, $request->contacted));
+        \Mail::to($to)->send(new \App\Mail\Feedback($request->content, $request->lesson, $name, $email, $users_country, $currentLocale->name, $request->contacted));
 
-        return redirect('/')->with('success', 'Din feedback har skickats!');
+        return redirect('/')->with('success', __('Din feedback har skickats!'));
     }
 }

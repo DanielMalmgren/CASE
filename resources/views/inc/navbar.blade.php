@@ -55,7 +55,6 @@
                     <li aria-haspopup="true"><a href="#"><i class="fa fa-angle-right"></i>{{Auth::user()->firstname}}</a>
                         <ul class="sub-menu">
                             <li aria-haspopup="false"><a href="/settings">@lang('Inställningar')</a></li>
-                            <li aria-haspopup="false"><a href="/feedback">@lang('Feedback')</a></li>
                             <li aria-haspopup="false"><a href="/logout" id="logout">@lang('Logga ut')</a></li>
                         </ul>
                     </li>
@@ -72,6 +71,7 @@
                         @hasrole('Admin')
                             <li aria-haspopup="false"><a target="_blank" href="/pdf/Evikomp%20intern%20manual.pdf">@lang('Intern manual')</a></li>
                         @endhasrole
+                        <li aria-haspopup="false"><a href="/feedback">@lang('Feedback')</a></li>
                     </ul>
                 </li>
                 <li aria-haspopup="false"><a href="/about" class="{{ request()->is('about') ? 'active' : '' }}"></i>@lang('Info')</a></li>

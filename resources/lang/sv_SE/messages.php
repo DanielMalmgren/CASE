@@ -8,18 +8,13 @@ return [
     'infotext_long' => 'Projektet består av följande parter:
                    <ul>
                    <li> Projektet initierades av Linköpings kommuns avdelning för Forskning och Utveckling vilket är ett samarbete mellan kommuner i regionen, Region Östgötland och Linköpings Universitet. FoU har nära relationer med ett nätverk av kommunala samt privata vårdgivare, socialtjänst och socialarbete inom regionenhe region såväl som med nationella nationella utvecklingscentrum i Sverige.<br>
-                       Kontakt i Sverige: :contact_sweden<br><br>
 
                    <li> Dundee and Angus College, one of the largest training and education providers in Scotland with a strong track record of delivering health and social care training from introductory to advanced levels and of working closely with private and public sector employers. The college also had many years’ experience of leading and participating in EU partnerships through Erasmus and related programmes.</li>
-                       Contact in Scotland: :contact_scotland<br><br>
 
                    <li> Centro de Formacion Somorrostro, an integrated education and training centre based in the Basque region of Spain. The second largest training provider in the region it too had many years’ experience of working in the care sector and in the international partnerships through Erasmus.</li>
-                       Contact in Spain: :contact_spain<br><br>
                    
                    <li> Zemgale Planning Region (ZPR), a regional public authority in Latvia with responsibility for regional planning and development and the coordination of services including transport, education, social services, environmental protection and business support. Its development council includes 22 municipalities.</li>
-                       Contact in Latvia: :contact_latvia<br><br>
                    
                    <li> Teacher Training Centre Ilfov (TTC Ilfov), and independent training and resource centre in Romania, specialising in the professional, development and continuing education.</li>
-                       Contact in Romania: :contact_romania<br><br>
                    </ul>',
 ];

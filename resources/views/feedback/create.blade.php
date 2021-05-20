@@ -4,32 +4,30 @@
 
 @section('content')
 
-<script type="text/javascript">
-    function toggleDisableAnonymous() {
-        var a=document.getElementById('anonymous');
-        var c=document.getElementById('contacted');
-        if(c.checked) {
-            a.disabled = true;
-        } else {
-            a.disabled = false;
-        }
-    }
-
-    function toggleDisableContacted() {
-        var a=document.getElementById('anonymous');
-        var c=document.getElementById('contacted');
-        if(a.checked) {
-            c.disabled = true;
-        } else {
-            c.disabled = false;
-        }
-    }
-</script>
-
     <H1>@lang('Skicka feedback')</H1>
 
     <form method="post" action="{{action('FeedbackController@post')}}" accept-charset="UTF-8">
         @csrf
+
+        <div class="mb-3">
+            <label for="name">@lang('Namn')</label>
+            <input type="text" name="name" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="email">@lang('E-postadress')</label>
+            <input type="email" name="email" class="form-control" id="email">
+        </div>
+
+        <div class="mb-3">
+            <label for="country">@lang('Jag vill att min feedback ska nå ansvarig i')</label>
+            <select class="custom-select d-block w-100" name="country">
+                <option value="general">@lang('Allmänhet')</option>
+                @foreach($countries as $country)
+                    <option {{$users_country->id==$country->id?'selected':''}} value="{{$country->id}}">{{$country->name}}</option>
+                @endforeach
+            </select>
+        </div>
 
         <div class="mb-3">
             <label for="lesson">@lang('Min feedback gäller lektion')</label>
@@ -48,10 +46,6 @@
         <div class="mb-3">
             <label for="content">@lang('Meddelande')</label>
             <textarea rows=5 name="content" class="form-control"></textarea>
-        </div>
-
-        <div class="mb-3">
-            <label><input type="checkbox" id="anonymous" name="anonymous" onclick="toggleDisableContacted()">@lang('Jag vill vara anonym')</label>
         </div>
 
         <div class="mb-3">

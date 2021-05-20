@@ -15,14 +15,14 @@ class Feedback extends Mailable
      *
      * @return void
      */
-    public function __construct($content, $lesson, $name, $email, $mobile, $workplace, $contacted)
+    public function __construct($content, $lesson, $name, $email, $country, $language, $contacted)
     {
         $this->content = $content;
         $this->lesson = $lesson;
         $this->name = $name;
         $this->email = $email;
-        $this->mobile = $mobile;
-        $this->workplace = $workplace;
+        $this->country = $country;
+        $this->language = $language;
         $this->contacted = $contacted;
     }
 
@@ -30,8 +30,8 @@ class Feedback extends Mailable
     public $lesson;
     public $name;
     public $email;
-    public $mobile;
-    public $workplace;
+    public $country;
+    public $language;
     public $contacted;
 
     /**
@@ -41,6 +41,10 @@ class Feedback extends Mailable
      */
     public function build()
     {
-        return $this->from($this->email, $this->name)->view('emails.feedback');
+        if($this->email !== null && $this->name !== null) {
+            return $this->from($this->email, $this->name)->view('emails.feedback');
+        } else {
+            return $this->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))->view('emails.feedback');
+        }
     }
 }

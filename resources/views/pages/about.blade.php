@@ -8,13 +8,17 @@
     <div class="card-body">
         @lang('messages.infotext')
         <br><br>
-        @lang('messages.infotext_long', [
-                                            'contact_sweden' => Html::mailto(env('CONTACT_SWEDEN')),
-                                            'contact_scotland' => Html::mailto(env('CONTACT_SCOTLAND')),
-                                            'contact_latvia' => Html::mailto(env('CONTACT_LATVIA')),
-                                            'contact_romania' => Html::mailto(env('CONTACT_ROMANIA')),
-                                            'contact_spain' => Html::mailto(env('CONTACT_SPAIN')),
-                                        ])
+        @lang('messages.infotext_long')
+    </div>
+</div>
+
+<br><br>
+
+<div class="card">
+    <div class="card-body">
+        @lang('If you wish to contact the project team, click below')
+        <br><br>
+        <a href="/feedback" class="btn btn-primary">@lang('Feedback')</a>
     </div>
 </div>
 
