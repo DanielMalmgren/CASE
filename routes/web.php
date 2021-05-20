@@ -53,7 +53,7 @@ Route::post('/test/question/reorder',           'QuestionController@reorder')->m
 
 //FeedbackController
 Route::get('/feedback',                         'FeedbackController@create');
-Route::post('/feedback',                        'FeedbackController@post');
+Route::post('/feedback',                        'FeedbackController@post')->middleware(['honey', 'honey-recaptcha']);
 
 //UsersControler
 Route::get('/users/create',                     'UsersController@create')->middleware('permission:manage users');

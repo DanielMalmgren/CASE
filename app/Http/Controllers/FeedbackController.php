@@ -54,12 +54,11 @@ class FeedbackController extends Controller
         }
 
         $geoip = geoip()->getLocation($request->ip);
-        $users_country = Country::where('name', $geoip->country)->first();
 
         $to = [];
         $to[] = ['email' => env($contact_env), 'name' => 'CASE contact'];
 
-        \Mail::to($to)->send(new \App\Mail\Feedback($request->content, $request->lesson, $name, $email, $users_country, $request->contacted));
+        \Mail::to($to)->send(new \App\Mail\Feedback($request->content, $request->lesson, $name, $email, $geoip->country, $request->contacted));
 
         return redirect('/')->with('success', __('Din feedback har skickats!'));
     }

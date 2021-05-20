@@ -54,6 +54,8 @@
 
         <br>
 
+        <x-honey recaptcha/>
+
         <button class="btn btn-primary btn-lg btn-block" type="submit">@lang('Skicka')</button>
     </form>
 
