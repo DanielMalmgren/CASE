@@ -35,9 +35,9 @@
                 <option selected value="null">@lang('Ingen specifik lektion')</option>
                 @foreach($lessons as $lesson)
                     @if(isset($activelesson) && $lesson->id == $activelesson)
-                        <option selected value="{{$lesson->name}}">{{$lesson->name}}</option>
+                        <option selected value="{{$lesson->translation()->name}}">{{$lesson->translation()->name}}</option>
                     @else
-                        <option value="{{$lesson->name}}">{{$lesson->name}}</option>
+                        <option value="{{$lesson->translation()->name}}">{{$lesson->translation()->name}}</option>
                     @endif
                 @endforeach
             </select>

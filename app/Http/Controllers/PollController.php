@@ -105,7 +105,7 @@ class PollController extends Controller
         $column_order = [];
         foreach($poll->poll_questions->where('type', '!=', 'pagebreak')->sortBy('order') as $question) {
             $cell = $worksheet->getCellByColumnAndRow($i, 1);
-            $cell->setValue($question->translateOrDefault(\App::getLocale())->text);
+            $cell->setValue($question->translation()->text);
             $worksheet->getColumnDimension($cell->getColumn())->setAutoSize(true);
             $worksheet->getStyle($cell->getCoordinate())->getFont()->setBold(true);
             $column_order[$question->id] = $i;
@@ -132,7 +132,7 @@ class PollController extends Controller
 
         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
 
-        $filename = "Sammanställning enkätsvar ".$poll->translateOrDefault(\App::getLocale())->name.".xlsx";
+        $filename = "Sammanställning enkätsvar ".$poll->translation()->name.".xlsx";
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment; filename="'.$filename.'"');
         $writer->save("php://output");

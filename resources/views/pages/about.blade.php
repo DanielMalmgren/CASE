@@ -16,7 +16,7 @@
 
 <div class="card">
     <div class="card-body">
-        @lang('If you wish to contact the project team, click below')
+        @lang('Om du vill kontakta projektteamet, klicka nedan')
         <br><br>
         <a href="/feedback" class="btn btn-primary">@lang('Feedback')</a>
     </div>

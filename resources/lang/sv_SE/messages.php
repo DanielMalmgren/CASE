@@ -9,12 +9,12 @@ return [
                    <ul>
                    <li> Projektet initierades av Linköpings kommuns avdelning för Forskning och Utveckling vilket är ett samarbete mellan kommuner i regionen, Region Östgötland och Linköpings Universitet. FoU har nära relationer med ett nätverk av kommunala samt privata vårdgivare, socialtjänst och socialarbete inom regionenhe region såväl som med nationella nationella utvecklingscentrum i Sverige.<br>
 
-                   <li> Dundee and Angus College, one of the largest training and education providers in Scotland with a strong track record of delivering health and social care training from introductory to advanced levels and of working closely with private and public sector employers. The college also had many years’ experience of leading and participating in EU partnerships through Erasmus and related programmes.</li>
+                   <li> Dundee and Angus College, en av de största utbildningssamordnarna i Skottland med stor erfarenhet av att erbjuda utbildning inom vård och omsorg från introduktionsnivå till avancerad nivå och vid ett när arbete med arbetsgivare inom både privat och allmän sektor. Lärosätet har också många års erfarenhet av ledande och deltagande i EU-samarbeten genom Erasmus och relaterade program.</li>
 
-                   <li> Centro de Formacion Somorrostro, an integrated education and training centre based in the Basque region of Spain. The second largest training provider in the region it too had many years’ experience of working in the care sector and in the international partnerships through Erasmus.</li>
+                   <li> Centro de Formacion Somorrostro, ett integrerat lär- och träningscentrum baserat i Baskien i Spanien. Som den näst största utbildningssamordnaren i regionen har lärosätet många års erfarenhet av arbete i vårdsektorn och av internationella partnerskap genom Erasmus.</li>
                    
-                   <li> Zemgale Planning Region (ZPR), a regional public authority in Latvia with responsibility for regional planning and development and the coordination of services including transport, education, social services, environmental protection and business support. Its development council includes 22 municipalities.</li>
+                   <li> Zemgale Planning Region (ZPR), en myndighet i Lettland med ansvar för regional planering och koordinering av tjänster som transport, utbildning, socialtjänst, miljöskydd och företagssupport. Dess utvecklingsorganisation inkluderar 22 kommuner.</li>
                    
-                   <li> Teacher Training Centre Ilfov (TTC Ilfov), and independent training and resource centre in Romania, specialising in the professional, development and continuing education.</li>
+                   <li> Teacher Training Centre Ilfov (TTC Ilfov), ett oberoende tränings- och resurscentrum i Rumänien, specialiserat på professionellt och kontinuerligt arbetsplatslärande.</li>
                    </ul>',
 ];
