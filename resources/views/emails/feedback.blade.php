@@ -10,7 +10,6 @@
 <p>@lang('Namn'): {{$name}}</p>
 <p>@lang('E-post'): {{$email}}</p>
 <p>@lang('Land'): {{$country}}</p>
-<p>@lang('Språk'): {{$language}}</p>
 @if($contacted)
     @lang('Personen önskar bli kontaktad gällande detta!')
 @endif
