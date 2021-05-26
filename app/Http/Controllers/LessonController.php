@@ -454,6 +454,7 @@ class LessonController extends Controller
         $lesson->active = $request->active;
         $lesson->track_id = $request->track;
         $lesson->limited_by_country = $request->limited_by_country;
+        $lesson->diploma = $request->diploma;
         $lesson->save();
 
         $lesson->countries()->sync($request->countries);

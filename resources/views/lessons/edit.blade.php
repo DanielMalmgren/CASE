@@ -124,6 +124,11 @@
         </div>
 
         <div class="mb-3">
+            <input type="hidden" name="diploma" value="0">
+            <label><input type="checkbox" name="diploma" value="1" {{$lesson->diploma?"checked":""}}>@lang('Tillåt diplomutskrift')</label>
+        </div>
+
+        <div class="mb-3">
             <input type="hidden" name="limited_by_country" value="0">
             <label><input type="checkbox" name="limited_by_country" id="limited_by_country" value="1" {{$lesson->limited_by_country?"checked":""}}>@lang('Begränsad enbart till vissa länder')</label>
         </div>

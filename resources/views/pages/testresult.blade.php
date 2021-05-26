@@ -24,15 +24,13 @@
                 <br><br>
                 <a href="/lessons/{{$lesson->id}}" class="btn btn-primary">@lang('Tillbaka till lektionen')</a>
             @else
-                @lang('Bra, alla rätt på första försöket!')<br><br>
+                @lang('Bra, alla rätt!')<br><br>
 
                 @if($poll !== null)
                     @lang('Innan du är helt färdig vill vi dock ha din feedback på innehållet. Klicka nedan!')
                     <br><br>
                     <a href="/poll/{{$poll->id}}" class="btn btn-primary">@lang('Gå till enkät')</a>
-                @elseif($lesson->next() !== null)
-                    <a href="/lessons/{{$lesson->next()->id}}" class="btn btn-primary">@lang('Nästa lektion')</a>
-                @else
+                @elseif($lesson->diploma)
 
                     @lang('Du är nu färdig med detta spår och kan välja mellan att skriva ut ett diplom eller skicka ett mail direkt ifrån plattformen som intygar detta.')<br><br>
 
@@ -65,6 +63,8 @@
                         <button class="btn btn-primary btn-lg btn-primary" type="submit">@lang('Skicka mail med intyg')</button>
 
                     </form>
+                @elseif($lesson->next() !== null)
+                    <a href="/lessons/{{$lesson->next()->id}}" class="btn btn-primary">@lang('Nästa lektion')</a>
                 @endif
 
             @endif
