@@ -29,7 +29,7 @@
                 @if($poll !== null)
                     @lang('Innan du är helt färdig vill vi dock ha din feedback på innehållet. Klicka nedan!')
                     <br><br>
-                    <a href="/poll/{{$poll->id}}" class="btn btn-primary">@lang('Gå till enkät')</a>
+                    <a href="/poll/{{$poll->id}}/{{$lesson->id}}" class="btn btn-primary">@lang('Gå till enkät')</a>
                 @elseif($lesson->diploma)
 
                     @lang('Du är nu färdig med detta spår och kan välja mellan att skriva ut ett diplom eller skicka ett mail direkt ifrån plattformen som intygar detta.')<br><br>
