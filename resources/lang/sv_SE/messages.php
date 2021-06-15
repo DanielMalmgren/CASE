@@ -7,7 +7,7 @@ return [
                    Case är finansierat av Europeiska Unionen genom Erasmus+.',
     'infotext_long' => 'Projektet består av följande parter:
                    <ul>
-                   <li> Projektet initierades av Linköpings kommuns avdelning för Forskning och Utveckling vilket är ett samarbete mellan kommuner i regionen, Region Östgötland och Linköpings Universitet. FoU har nära relationer med ett nätverk av kommunala samt privata vårdgivare, socialtjänst och socialarbete inom regionenhe region såväl som med nationella nationella utvecklingscentrum i Sverige.<br>
+                   <li> Projektet initierades av Linköpings kommuns avdelning för Forskning och Utveckling vilket är ett samarbete mellan kommuner i regionen, Region Östgötland och Linköpings Universitet. FoU har nära relationer med ett nätverk av kommunala samt privata vårdgivare, socialtjänst och socialarbete inom regionenhe region såväl som med nationella nationella utvecklingscentrum i Sverige.</li>
 
                    <li> Dundee and Angus College, en av de största utbildningssamordnarna i Skottland med stor erfarenhet av att erbjuda utbildning inom vård och omsorg från introduktionsnivå till avancerad nivå och vid ett när arbete med arbetsgivare inom både privat och allmän sektor. Lärosätet har också många års erfarenhet av ledande och deltagande i EU-samarbeten genom Erasmus och relaterade program.</li>
 
