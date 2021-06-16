@@ -23,6 +23,10 @@ class Localization
         } else {
             $localefirstletters = substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
             $locale = Locale::where('id', 'like', $localefirstletters.'%')->first();
+            if(!isset($locale)) {
+                logger("Unknown browser locale: ".$request->server('HTTP_ACCEPT_LANGUAGE'));
+                $locale = Locale::find('en_US');
+            }
             \App::setLocale($locale->id);
             setlocale(LC_TIME, $locale->id);
         }
