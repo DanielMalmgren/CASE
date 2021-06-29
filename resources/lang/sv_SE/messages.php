@@ -1,6 +1,6 @@
 <?php 
 return [
-  'infotext' => 'Denna platform är utvecklad i ett samarbete mellan fem parter i fem europeiska länder.
+  'infotext' => 'Denna platform är utvecklad i ett samarbete mellan fem parter i fem europeiska länder.<br>
                    Vi har gemensamma utmaningar som följd av en åldrande befolkning i Europa. Demenssjukdomar ökar och vi vill erbjuda bästa möjliga vård.<br>
                    Därför behövs det välutbildad och skicklig personal. Denna plattform erbjuder ny och oerfaren personal inom vård- och omsorgssektorn en möjlighet att utveckla kunskap gällande demens och omsorg om personer med sjukdomarna.<br><br>
                    
