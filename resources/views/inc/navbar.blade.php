@@ -117,22 +117,22 @@
                 </li>
                 <li aria-haspopup="false"><a href="/about" class="{{ request()->is('about') ? 'active' : '' }}"></i>@lang('Info')</a></li>
 
-                <img src="images/flags/{{get_locale_letters()}}.png" id="current_flag" />
+                <img src="images/Flags/{{get_locale_letters()}}.png" id="current_flag" />
                 <div class="initial-hide">
                     @if(get_locale_letters() != 'en')
-                        <img src="images/flags/en.png" onClick="changelang('en_US')" />
+                        <img src="images/Flags/en.png" onClick="changelang('en_US')" />
                     @endif
                     @if(get_locale_letters() != 'sv')
-                        <img src="images/flags/sv.png" onClick="changelang('sv_SE')" />
+                        <img src="images/Flags/sv.png" onClick="changelang('sv_SE')" />
                     @endif
                     @if(get_locale_letters() != 'lv')
-                        <img src="images/flags/lv.png" onClick="changelang('lv_LV')" />
+                        <img src="images/Flags/lv.png" onClick="changelang('lv_LV')" />
                     @endif
                     @if(get_locale_letters() != 'ro')
-                        <img src="images/flags/ro.png" onClick="changelang('ro_RO')" />
+                        <img src="images/Flags/ro.png" onClick="changelang('ro_RO')" />
                     @endif
                     @if(get_locale_letters() != 'es')
-                        <img src="images/flags/es.png" onClick="changelang('es_ES')" />
+                        <img src="images/Flags/es.png" onClick="changelang('es_ES')" />
                     @endif
                 </div>
 
