@@ -16,7 +16,48 @@
         $('.global-search').on('select2:select', function (e) {
             window.location = e.params.data.url;
         });
+
+        $expanded = false;
+        $("#current_flag").click(function() {
+            if ($expanded) {
+                $expanded = false;
+                $(".initial-hide").animate(
+                    {
+                    'width':'0px',
+                    'min-width':'0px',
+                    'max-width':'0px'
+                    },
+                    "slow",
+                    function() {
+                        $(".initial-hide").removeClass("visible-state");
+                    }
+                );
+            } else {
+                $expanded = true;
+                $(".initial-hide").addClass("visible-state");
+                $(".initial-hide").animate(
+                    {
+                        'width':'32px',
+                        'min-width':'32px',
+                        'max-width':'32px'
+                    },
+                    "slow"
+                );
+            }
+        });
+
     });
+
+    function changelang(lang) {
+        console.log(lang);
+        var url = window.location.href;    
+        if (url.indexOf('?') > -1){
+            url += '&lang='+lang
+        }else{
+            url += '?lang='+lang
+        }
+        window.location.href = url;
+    }
 </script>
 
 <!-- Mobile Header -->
@@ -54,7 +95,7 @@
                 @auth
                     <li aria-haspopup="true"><a href="#"><i class="fa fa-angle-right"></i>{{Auth::user()->firstname}}</a>
                         <ul class="sub-menu">
-                            <li aria-haspopup="false"><a href="/settings">@lang('Inställningar')</a></li>
+                            {{--<li aria-haspopup="false"><a href="/settings">@lang('Inställningar')</a></li>--}}
                             <li aria-haspopup="false"><a href="/logout" id="logout">@lang('Logga ut')</a></li>
                         </ul>
                     </li>
@@ -75,6 +116,26 @@
                     </ul>
                 </li>
                 <li aria-haspopup="false"><a href="/about" class="{{ request()->is('about') ? 'active' : '' }}"></i>@lang('Info')</a></li>
+
+                <img src="images/flags/{{get_locale_letters()}}.png" id="current_flag" />
+                <div class="initial-hide">
+                    @if(get_locale_letters() != 'en')
+                        <img src="images/flags/en.png" onClick="changelang('en_US')" />
+                    @endif
+                    @if(get_locale_letters() != 'sv')
+                        <img src="images/flags/sv.png" onClick="changelang('sv_SE')" />
+                    @endif
+                    @if(get_locale_letters() != 'lv')
+                        <img src="images/flags/lv.png" onClick="changelang('lv_LV')" />
+                    @endif
+                    @if(get_locale_letters() != 'ro')
+                        <img src="images/flags/ro.png" onClick="changelang('ro_RO')" />
+                    @endif
+                    @if(get_locale_letters() != 'es')
+                        <img src="images/flags/es.png" onClick="changelang('es_ES')" />
+                    @endif
+                </div>
+
                 <li class="search-wrapper" aria-haspopup="false"><select class="global-search"></select></li>
             </ul>
         </nav>

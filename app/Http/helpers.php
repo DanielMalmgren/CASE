@@ -1,5 +1,10 @@
 <?php
 
+function get_locale_letters() {
+    $session_locale = session('locale');
+    return substr($session_locale, 0, 2);
+}
+
 /*function locale_is_default() {
     return \App::isLocale(\Config::get('app.fallback_locale'));
 }*/

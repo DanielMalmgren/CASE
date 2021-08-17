@@ -16,7 +16,32 @@ class Localization
      */
     public function handle($request, Closure $next)
     {
-        $user = \Auth::user();
+        if(isset($request->lang)) {
+            $locale = Locale::find($request->lang);
+            $request->session()->put('locale', $locale->id);
+        } elseif($request->session()->has('locale')) {
+            $session_locale = $request->session()->get('locale');
+            $locale = Locale::where('id', $session_locale)->first();
+        } else {
+            $geoip = geoip()->getLocation($request->ip);
+            $iso_code=$geoip->iso_code;
+            if($iso_code == 'GB') {
+                $iso_code = 'US';
+            }
+            $locale = Locale::where('id', 'like', '%'.$iso_code)->first();
+            if(isset($locale)) {
+                $request->session()->put('locale', $locale->id);
+            }
+        }
+
+        if(!isset($locale)) {
+            $locale = Locale::find('en_US');
+        }
+
+        \App::setLocale($locale->id);
+        setlocale(LC_TIME, $locale->id);
+
+        /*$user = \Auth::user();
         if(isset($user)) {
             \App::setLocale($user->locale_id);
             setlocale(LC_TIME, $user->locale_id);
@@ -34,7 +59,7 @@ class Localization
             }
             \App::setLocale($locale->id);
             setlocale(LC_TIME, $locale->id);
-        }
+        }*/
 
         return $next($request);
     }
