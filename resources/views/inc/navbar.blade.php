@@ -17,40 +17,14 @@
             window.location = e.params.data.url;
         });
 
-        $expanded = false;
         $("#current_flag").click(function() {
-            if ($expanded) {
-                $expanded = false;
-                $(".initial-hide").animate(
-                    {
-                    'width':'0px',
-                    'min-width':'0px',
-                    'max-width':'0px'
-                    },
-                    "slow",
-                    function() {
-                        $(".initial-hide").removeClass("visible-state");
-                    }
-                );
-            } else {
-                $expanded = true;
-                $(".initial-hide").addClass("visible-state");
-                $(".initial-hide").animate(
-                    {
-                        'width':'32px',
-                        'min-width':'32px',
-                        'max-width':'32px'
-                    },
-                    "slow"
-                );
-            }
+            $(".initial-hide").toggleClass("visible-state");
         });
-
     });
 
     function changelang(lang) {
         console.log(lang);
-        var url = window.location.href;    
+        var url = window.location.href;
         if (url.indexOf('?') > -1){
             url += '&lang='+lang
         }else{
@@ -117,24 +91,26 @@
                 </li>
                 <li aria-haspopup="false"><a href="/about" class="{{ request()->is('about') ? 'active' : '' }}"></i>@lang('Info')</a></li>
 
-                <img src="images/Flags/{{get_locale_letters()}}.png" id="current_flag" />
-                <div class="initial-hide">
-                    @if(get_locale_letters() != 'en')
-                        <img src="images/Flags/en.png" onClick="changelang('en_US')" />
-                    @endif
-                    @if(get_locale_letters() != 'sv')
-                        <img src="images/Flags/sv.png" onClick="changelang('sv_SE')" />
-                    @endif
-                    @if(get_locale_letters() != 'lv')
-                        <img src="images/Flags/lv.png" onClick="changelang('lv_LV')" />
-                    @endif
-                    @if(get_locale_letters() != 'ro')
-                        <img src="images/Flags/ro.png" onClick="changelang('ro_RO')" />
-                    @endif
-                    @if(get_locale_letters() != 'es')
-                        <img src="images/Flags/es.png" onClick="changelang('es_ES')" />
-                    @endif
-                </div>
+                <li aria-haspopup="false">
+                    <img src="images/Flags/{{get_locale_letters()}}.png" class="current_flag" id="current_flag" />
+                    <div class="initial-hide">
+                        @if(get_locale_letters() != 'en')
+                            <img src="images/Flags/en.png" onClick="changelang('en_US')" />
+                        @endif
+                        @if(get_locale_letters() != 'sv')
+                            <img src="images/Flags/sv.png" onClick="changelang('sv_SE')" />
+                        @endif
+                        @if(get_locale_letters() != 'lv')
+                            <img src="images/Flags/lv.png" onClick="changelang('lv_LV')" />
+                        @endif
+                        @if(get_locale_letters() != 'ro')
+                            <img src="images/Flags/ro.png" onClick="changelang('ro_RO')" />
+                        @endif
+                        @if(get_locale_letters() != 'es')
+                            <img src="images/Flags/es.png" onClick="changelang('es_ES')" />
+                        @endif
+                    </div>
+                </li>
 
                 <li class="search-wrapper" aria-haspopup="false"><select class="global-search"></select></li>
             </ul>

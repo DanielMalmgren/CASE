@@ -287,18 +287,43 @@ ul.announcements {
 * ====================== Project time ===========================
 */
 
+.current_flag {
+    margin-top:20px;
+    margin-left:10px;
+}
+
 .initial-hide {
-    overflow: hidden;
-    width: 0;
-    max-width:0;
-    border-spacing: 0;
-    padding-right: 0 !important;
-    padding-left:0 !important;
-    visibility: hidden;
+    position:absolute; /* Gör att den inte tar upp någon plats samt att det går att justera */
+    top:55px; /* Justera så den börjar på samma höjd där toppmenyn slutar, borde bli ok */
+    opacity: 0;   /* så den inte syns från början */
+    transition: opacity .3s;  /* Animera opacity när visible-state togglas */
+    z-index:-1; /* Så man inte kan klicka på flaggorna vid dolt läge */
+    background-color:#fff;
+    padding:10px;
 }
 
 .visible-state {
-  visibility: visible;
+  z-index:10000; /* Så flaggorna läggs över allt annat */
+  opacity:1;
+  transition: opacity .3s;
+
+}
+
+.initial-hide img:first-child {
+  margin-left:0;
+}
+
+.initial-hide img {
+  margin-left:5px;
+}
+
+.initial-hide img:hover {
+  opacity:.8; /* Så det händer något vid hovring */
+}
+
+#current_flag:hover,
+.initial-hide.visible-state img:hover {
+  cursor:pointer;
 }
 
 .nowrap {
