@@ -24,7 +24,7 @@
             <select class="custom-select d-block w-100" name="country">
                 <option value="general">@lang('Allmänhet')</option>
                 @foreach($countries as $country)
-                    <option {{$users_country->id==$country->id?'selected':''}} value="{{$country->id}}">{{$country->name}}</option>
+                    <option {{$users_country&&$users_country->id==$country->id?'selected':''}} value="{{$country->id}}">{{$country->name}}</option>
                 @endforeach
             </select>
         </div>
